@@ -50,15 +50,4 @@ public class OracleDatabaseConnector {
         }
         return resultSet;
     }
-
-    public static void main(String[] args) {
-        String username = "HR";
-        String password = "hr";
-
-        OracleDatabaseConnector connector = new OracleDatabaseConnector(username, password);
-
-        connector.connect();
-
-        connector.disconnect();
-    }
 }

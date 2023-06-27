@@ -27,8 +27,10 @@ public class Login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         textFieldUsuario = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
         fieldPassword = new javax.swing.JPasswordField();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
         botonLogin = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         imaBackground = new javax.swing.JLabel();
@@ -52,10 +54,13 @@ public class Login extends javax.swing.JFrame {
                 textFieldUsuarioKeyTyped(evt);
             }
         });
-        jPanel1.add(textFieldUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, 260, -1));
+        jPanel1.add(textFieldUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 220, -1));
 
         jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, 260, 10));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, 220, 10));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icon_user.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, -1, -1));
 
         fieldPassword.setBackground(new java.awt.Color(101, 98, 102));
         fieldPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -63,10 +68,13 @@ public class Login extends javax.swing.JFrame {
         fieldPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         fieldPassword.setText("Password");
         fieldPassword.setBorder(null);
-        jPanel1.add(fieldPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 260, -1));
+        jPanel1.add(fieldPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, 220, -1));
 
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 310, 260, 10));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, 220, 10));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icon_password.png"))); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, -1, -1));
 
         botonLogin.setBackground(new java.awt.Color(0, 0, 0));
         botonLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -184,7 +192,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel botonLogin;
     private javax.swing.JPasswordField fieldPassword;
     private javax.swing.JLabel imaBackground;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
