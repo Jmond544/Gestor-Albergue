@@ -1,11 +1,19 @@
 
 package GUI;
 
+import Database.OracleDatabaseConnector;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 
 public class Login extends javax.swing.JFrame {
 
+    // ATRIBUTOS
+    
+    private OracleDatabaseConnector oracleDatabaseConnector;
+    
+    // MÉTODOS
+    
     public Login() {
         initComponents();
         textFieldUsuario.setBackground(new java.awt.Color(0,0,0,1));
@@ -115,7 +123,20 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonLoginMouseClicked
+        String username = textFieldUsuario.getText();
+        String password = String.valueOf(fieldPassword.getPassword());
         
+        oracleDatabaseConnector = new OracleDatabaseConnector(username, password);
+        
+        if(oracleDatabaseConnector.connect()){
+            DashBoard dashBoard = new DashBoard();
+            jPanel1.setVisible(false);
+            dispose();
+            dashBoard.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Error al conectar con la base de datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+                
     }//GEN-LAST:event_botonLoginMouseClicked
 
     private void botonLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonLoginMousePressed
@@ -134,12 +155,7 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_textFieldUsuarioKeyTyped
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    public void showLogin() {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -156,10 +172,7 @@ public class Login extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);

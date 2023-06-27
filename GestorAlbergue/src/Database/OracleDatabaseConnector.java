@@ -18,12 +18,14 @@ public class OracleDatabaseConnector {
         this.password = password;
     }
 
-    public void connect() {
+    public boolean connect() {
         try {
             connection = DriverManager.getConnection(url, username, password);
             System.out.println("Conexión exitosa a la base de datos Oracle.");
+            return true;
         } catch (SQLException e) {
             System.out.println("Error al conectar a la base de datos Oracle: " + e.getMessage());
+            return false;
         }
     }
 
@@ -50,14 +52,12 @@ public class OracleDatabaseConnector {
     }
 
     public static void main(String[] args) {
-        String username = "HR"; // Cambia los valores según tu configuración
-        String password = "hr"; // Cambia los valores según tu configuración
+        String username = "HR";
+        String password = "hr";
 
         OracleDatabaseConnector connector = new OracleDatabaseConnector(username, password);
 
         connector.connect();
-
-        // Realiza las operaciones necesarias en la base de datos
 
         connector.disconnect();
     }
