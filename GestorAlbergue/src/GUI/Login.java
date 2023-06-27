@@ -47,7 +47,7 @@ public class Login extends javax.swing.JFrame {
         textFieldUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textFieldUsuario.setForeground(new java.awt.Color(204, 204, 204));
         textFieldUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        textFieldUsuario.setText("Digite el nombre de usuario");
+        textFieldUsuario.setText("User");
         textFieldUsuario.setBorder(null);
         textFieldUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -137,7 +137,7 @@ public class Login extends javax.swing.JFrame {
         oracleDatabaseConnector = new OracleDatabaseConnector(username, password);
         
         if(oracleDatabaseConnector.connect()){
-            DashBoard dashBoard = new DashBoard();
+            Dashboard dashBoard = new Dashboard();
             jPanel1.setVisible(false);
             dispose();
             dashBoard.setVisible(true);
@@ -156,7 +156,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_botonLoginMouseReleased
 
     private void textFieldUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFieldUsuarioKeyTyped
-        if(textFieldUsuario.getText().equals("Digite el nombre de usuario")){
+        if(textFieldUsuario.getText().equals("User")){
             textFieldUsuario.setForeground(Color.decode("#FFFFFF"));
             textFieldUsuario.setText("");
             fieldPassword.setText("");
