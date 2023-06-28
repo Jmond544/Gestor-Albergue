@@ -74,8 +74,7 @@ CREATE TABLE Area(
     descriptionArea VARCHAR2(50) NOT NULL,
     budgetArea DECIMAL(8, 2) NOT NULL,
     CONSTRAINT pk_Area PRIMARY KEY(idArea),
-    CONSTRAINT chk_budgetArea CHECK (budgetArea > 0),
-    CONSTRAINT chk_amountPeople CHECK (amountPeople > 0)
+    CONSTRAINT chk_budgetArea CHECK (budgetArea > 0)
 );
 
 CREATE TABLE Employee(
