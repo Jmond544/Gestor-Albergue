@@ -72,7 +72,6 @@ CREATE TABLE Area(
     idSupervisor NUMBER(8) NOT NULL,
     nameArea VARCHAR2(30) NOT NULL,
     descriptionArea VARCHAR2(50) NOT NULL,
-    amountPeople VARCHAR2(30) NOT NULL,
     budgetArea DECIMAL(8, 2) NOT NULL,
     CONSTRAINT pk_Area PRIMARY KEY(idArea),
     CONSTRAINT chk_budgetArea CHECK (budgetArea > 0),
