@@ -15,6 +15,7 @@ public class Dashboard extends javax.swing.JFrame {
     private Connection conexion;
     private boolean estadoBotones[];
     private javax.swing.JPanel listaBotones[];
+    private javax.swing.JPanel listaScreen[];
     
     // Métodos
     
@@ -23,6 +24,10 @@ public class Dashboard extends javax.swing.JFrame {
         estadoBotones = new boolean[6];
         initComponents();
         listaBotones = new JPanel[] {botonGeneral,botonCrud,botonInforme,botonCrearUsuario,botonAcercaDe,botonSalir};
+        listaScreen = new JPanel[] {new ScreenGeneral(conexion),
+            new ScreenCrudTables(conexion), new ScreenInformes(conexion),
+            new ScreenCreateUser(conexion), new ScreenAcercaDe(conexion),
+            new ScreenSalir(conexion)};
         pulsacionBoton(6);
         try {
             labelUserName.setText("Usuario: "+conexion.getMetaData().getUserName());
@@ -56,7 +61,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     private void showPanel(JPanel p){
-        p.setSize(774,611);
+        p.setSize(789,700);
         p.setLocation(0, 0);
         principalPanel.removeAll();
         principalPanel.add(p, BorderLayout.CENTER);
@@ -119,6 +124,9 @@ public class Dashboard extends javax.swing.JFrame {
         botonGeneral.setBackground(new java.awt.Color(53, 80, 112));
         botonGeneral.setForeground(new java.awt.Color(0, 24, 72));
         botonGeneral.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonGeneralMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 botonGeneralMouseEntered(evt);
             }
@@ -153,6 +161,9 @@ public class Dashboard extends javax.swing.JFrame {
         botonCrud.setBackground(new java.awt.Color(53, 80, 112));
         botonCrud.setForeground(new java.awt.Color(0, 24, 72));
         botonCrud.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonCrudMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 botonCrudMouseEntered(evt);
             }
@@ -185,6 +196,9 @@ public class Dashboard extends javax.swing.JFrame {
         botonInforme.setBackground(new java.awt.Color(53, 80, 112));
         botonInforme.setForeground(new java.awt.Color(0, 24, 72));
         botonInforme.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonInformeMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 botonInformeMouseEntered(evt);
             }
@@ -217,6 +231,9 @@ public class Dashboard extends javax.swing.JFrame {
         botonCrearUsuario.setBackground(new java.awt.Color(53, 80, 112));
         botonCrearUsuario.setForeground(new java.awt.Color(0, 24, 72));
         botonCrearUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonCrearUsuarioMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 botonCrearUsuarioMouseEntered(evt);
             }
@@ -249,6 +266,9 @@ public class Dashboard extends javax.swing.JFrame {
         botonAcercaDe.setBackground(new java.awt.Color(53, 80, 112));
         botonAcercaDe.setForeground(new java.awt.Color(0, 24, 72));
         botonAcercaDe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonAcercaDeMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 botonAcercaDeMouseEntered(evt);
             }
@@ -281,6 +301,9 @@ public class Dashboard extends javax.swing.JFrame {
         botonSalir.setBackground(new java.awt.Color(53, 80, 112));
         botonSalir.setForeground(new java.awt.Color(0, 24, 72));
         botonSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonSalirMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 botonSalirMouseEntered(evt);
             }
@@ -469,6 +492,30 @@ public class Dashboard extends javax.swing.JFrame {
     private void botonCrearUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCrearUsuarioMouseEntered
         botonEntered(3);
     }//GEN-LAST:event_botonCrearUsuarioMouseEntered
+
+    private void botonGeneralMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGeneralMouseClicked
+        showPanel(listaScreen[0]);
+    }//GEN-LAST:event_botonGeneralMouseClicked
+
+    private void botonCrudMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCrudMouseClicked
+        showPanel(listaScreen[1]);
+    }//GEN-LAST:event_botonCrudMouseClicked
+
+    private void botonInformeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonInformeMouseClicked
+        showPanel(listaScreen[2]);
+    }//GEN-LAST:event_botonInformeMouseClicked
+
+    private void botonCrearUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCrearUsuarioMouseClicked
+        showPanel(listaScreen[3]);
+    }//GEN-LAST:event_botonCrearUsuarioMouseClicked
+
+    private void botonAcercaDeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAcercaDeMouseClicked
+        showPanel(listaScreen[4]);
+    }//GEN-LAST:event_botonAcercaDeMouseClicked
+
+    private void botonSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalirMouseClicked
+        showPanel(listaScreen[5]);
+    }//GEN-LAST:event_botonSalirMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
