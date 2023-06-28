@@ -137,7 +137,7 @@ public class Login extends javax.swing.JFrame {
         oracleDatabaseConnector = new OracleDatabaseConnector(username, password);
         
         if(oracleDatabaseConnector.connect()!=null){
-            Dashboard dashBoard = new Dashboard();
+            Dashboard dashBoard = new Dashboard(oracleDatabaseConnector.getConnection());
             jPanel1.setVisible(false);
             dispose();
             dashBoard.setVisible(true);

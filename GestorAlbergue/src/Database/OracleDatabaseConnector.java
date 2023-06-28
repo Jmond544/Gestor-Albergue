@@ -50,4 +50,10 @@ public class OracleDatabaseConnector {
         }
         return resultSet;
     }
+
+    public Connection getConnection() {
+        return connection;
+    }
+    
+    
 }
