@@ -18,14 +18,14 @@ public class OracleDatabaseConnector {
         this.password = password;
     }
 
-    public boolean connect() {
+    public Connection connect() {
         try {
             connection = DriverManager.getConnection(url, username, password);
             System.out.println("Conexión exitosa a la base de datos Oracle.");
-            return true;
+            return connection;
         } catch (SQLException e) {
             System.out.println("Error al conectar a la base de datos Oracle: " + e.getMessage());
-            return false;
+            return connection;
         }
     }
 
