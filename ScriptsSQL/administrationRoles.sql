@@ -224,3 +224,6 @@ GRANT EXECUTE ANY PROCEDURE TO Shelter_Procurement_Area;
 /*Observando todos los roles*/
 
 SELECT * FROM dba_roles ORDER BY ROLE;
+
+CREATE USER JUAN IDENTIFIED BY 1234;
+GRANT Shelter_Manager TO JUAN;
