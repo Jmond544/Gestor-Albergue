@@ -18,6 +18,10 @@ public class MedicalExam {
         this.dateResults = dateResults;
         this.results = results;
     }
+    
+    public MedicalExam(){
+        
+    }
 
     public void setIdMedical_Exam(int idMedical_Exam) {
         this.idMedical_Exam = idMedical_Exam;

@@ -20,15 +20,7 @@ public class MedicalExam_BO {
             mensaje = meDao.agregarMedicalExam(conn, medicalExam);
         } catch (Exception ex) {
             mensaje = mensaje + " " + ex.getMessage();
-        } finally {
-            try {
-                if(conn!=null) {
-                    conn.close();
-                }
-            } catch (Exception e) {
-                mensaje = mensaje + " " + e.getMessage();
-            }
-        }
+        } 
         return mensaje;
     }
     public String modificarMedicalExam(MedicalExam medicalExam){
@@ -37,14 +29,6 @@ public class MedicalExam_BO {
             mensaje = meDao.modificarMedicalExam(conn, medicalExam);
         } catch (Exception ex) {
             mensaje = mensaje + " " + ex.getMessage();
-        } finally {
-            try {
-                if(conn!=null) {
-                    conn.close();
-                }
-            } catch (Exception e) {
-                mensaje = mensaje + " " + e.getMessage();
-            }
         }
         return mensaje;
     }
@@ -54,24 +38,11 @@ public class MedicalExam_BO {
             mensaje = meDao.eliminarMedicalExam(conn, id);
         } catch (Exception ex) {
             mensaje = mensaje + " " + ex.getMessage();
-        } finally {
-            try {
-                if(conn!=null) {
-                    conn.close();
-                }
-            } catch (Exception e) {
-                mensaje = mensaje + " " + e.getMessage();
-            }
         }
         return mensaje;
     }
     public void listarMedicalExam(JTable tabla){
         Connection conn = OracleDatabaseConnector.getConnection();
         meDao.listarMedicalExam(conn, tabla);
-        try {
-            conn.close();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 }

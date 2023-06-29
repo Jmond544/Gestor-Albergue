@@ -2,9 +2,9 @@
 package CRUD;
 
 import BO.MedicalExam_BO;
-import Database.OracleDatabaseConnector;
 import java.sql.Connection;
-import javax.swing.JTable;
+import javax.swing.JOptionPane;
+import Entity.*;
 
 public class Frm_Medical_Exam extends javax.swing.JPanel {
 
@@ -14,11 +14,21 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
     public Frm_Medical_Exam(Connection conexion) {
         initComponents();
         this.conexion = conexion;
+        this.me_BO = new MedicalExam_BO();
         listarMedical_Exam();
     }
 
     private void listarMedical_Exam(){
         me_BO.listarMedicalExam(TBEmpleado);
+    }
+    
+    private void limpiar(){
+        textFieldIdPatient.setValue(0);
+        textFieldConsultado.setText("Paciente");
+        textFieldTipoExamen.setText("");
+        textFieldFechaExamen.setText("");
+        textFieldFechaResultado.setText("");
+        textAreaResultado.setText("");
     }
     
     @SuppressWarnings("unchecked")
@@ -27,15 +37,15 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        textFieldIdPatient = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         textFieldTipoExamen = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         textFieldFechaExamen = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         textFieldFechaResultado = new javax.swing.JTextField();
-        testFieldConsultado = new javax.swing.JTextField();
+        textFieldConsultado = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         textAreaResultado = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
@@ -49,6 +59,8 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         botonLimpiar = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
+        textFieldIdPatient = new javax.swing.JSpinner();
+        textFieldIdExam = new javax.swing.JSpinner();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(785, 650));
@@ -59,7 +71,7 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Formulario exámen médico");
+        jLabel1.setText("Formulario examen médico");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -78,13 +90,13 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
                     .addGap(0, 0, 0)))
         );
 
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("ID Examen Médico:");
+
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("ID Paciente:");
-
-        textFieldIdPatient.setBackground(new java.awt.Color(255, 255, 255));
-        textFieldIdPatient.setForeground(new java.awt.Color(0, 0, 0));
-        textFieldIdPatient.setText("DNI");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
@@ -97,20 +109,20 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Fecha examen:");
 
+        textFieldFechaExamen.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldFechaExamen.setForeground(new java.awt.Color(0, 0, 0));
+
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Fecha resultados:");
 
-        textFieldFechaExamen.setBackground(new java.awt.Color(255, 255, 255));
-        textFieldFechaExamen.setForeground(new java.awt.Color(0, 0, 0));
-
         textFieldFechaResultado.setBackground(new java.awt.Color(255, 255, 255));
         textFieldFechaResultado.setForeground(new java.awt.Color(0, 0, 0));
 
-        testFieldConsultado.setBackground(new java.awt.Color(255, 255, 255));
-        testFieldConsultado.setForeground(new java.awt.Color(0, 0, 0));
-        testFieldConsultado.setText("User");
-        testFieldConsultado.setEnabled(false);
+        textFieldConsultado.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldConsultado.setForeground(new java.awt.Color(0, 0, 0));
+        textFieldConsultado.setText("Paciente");
+        textFieldConsultado.setEnabled(false);
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -137,6 +149,11 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
         jScrollPane2.setViewportView(TBEmpleado);
 
         botonAgregar.setBackground(new java.awt.Color(181, 101, 118));
+        botonAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonAgregarMouseClicked(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
@@ -155,6 +172,11 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
         );
 
         botonModificar.setBackground(new java.awt.Color(181, 101, 118));
+        botonModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonModificarMouseClicked(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
@@ -173,6 +195,11 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
         );
 
         botonEliminar.setBackground(new java.awt.Color(181, 101, 118));
+        botonEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonEliminarMouseClicked(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
@@ -191,6 +218,11 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
         );
 
         botonLimpiar.setBackground(new java.awt.Color(181, 101, 118));
+        botonLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonLimpiarMouseClicked(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
@@ -215,35 +247,36 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(18, 18, 18)
+                        .addComponent(textFieldIdExam, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(textFieldFechaResultado))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(textFieldFechaExamen, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(textFieldTipoExamen, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(textFieldIdPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(testFieldConsultado))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(textFieldTipoExamen, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(textFieldFechaResultado))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(textFieldFechaExamen, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(15, 15, 15))
+                        .addComponent(textFieldIdPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldConsultado))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addGap(15, 15, 15))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(botonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,30 +297,33 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(textFieldIdPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(testFieldConsultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(textFieldIdExam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(textFieldIdPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(textFieldConsultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(textFieldTipoExamen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(textFieldFechaExamen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(textFieldFechaResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(botonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -295,9 +331,80 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
                     .addComponent(botonLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonLimpiarMouseClicked
+        limpiar();
+    }//GEN-LAST:event_botonLimpiarMouseClicked
+
+    private void botonAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAgregarMouseClicked
+        if(textFieldIdPatient.getValue() == null || 
+                textFieldTipoExamen.getText().isEmpty() ||
+                textFieldFechaExamen.getText().isEmpty() ||
+                textFieldFechaResultado.getText().isEmpty() ||
+                textAreaResultado.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos.");
+        }else{
+            
+            MedicalExam medicalExam = new MedicalExam();
+            try {
+                medicalExam.setIdPatient((int)textFieldIdPatient.getValue());
+                medicalExam.setTypeExam(textFieldTipoExamen.getText());
+                medicalExam.setDateExam(textFieldFechaExamen.getText());
+                medicalExam.setDateResults(textFieldFechaResultado.getText());
+                medicalExam.setDateResults(textAreaResultado.getText());
+                String mensaje = me_BO.agregarMedicalExam(medicalExam);
+                JOptionPane.showMessageDialog(null, mensaje);
+                limpiar();
+                listarMedical_Exam();
+            } catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_botonAgregarMouseClicked
+
+    private void botonModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonModificarMouseClicked
+        if(textFieldIdPatient.getValue() == null || 
+                textFieldTipoExamen.getText().isEmpty() ||
+                textFieldFechaExamen.getText().isEmpty() ||
+                textFieldFechaResultado.getText().isEmpty() ||
+                textAreaResultado.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos.");
+        }else{
+            
+            MedicalExam medicalExam = new MedicalExam();
+            try {
+                medicalExam.setIdMedical_Exam((int) textFieldIdExam.getValue());
+                medicalExam.setIdPatient((int)textFieldIdPatient.getValue());
+                medicalExam.setTypeExam(textFieldTipoExamen.getText());
+                medicalExam.setDateExam(textFieldFechaExamen.getText());
+                medicalExam.setDateResults(textFieldFechaResultado.getText());
+                medicalExam.setDateResults(textAreaResultado.getText());
+                String mensaje = me_BO.modificarMedicalExam(medicalExam);
+                JOptionPane.showMessageDialog(null, mensaje);
+                limpiar();
+                listarMedical_Exam();
+            } catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_botonModificarMouseClicked
+
+    private void botonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarMouseClicked
+        if(textFieldIdExam.getValue() == null){
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos.");
+        }else{
+
+            try {
+                int index = (int) textFieldIdExam.getValue();
+                String mensaje = me_BO.eliminarMedicalExam(index);
+                JOptionPane.showMessageDialog(null, mensaje);
+                limpiar();
+                listarMedical_Exam();
+            } catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_botonEliminarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -308,6 +415,7 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
     private javax.swing.JPanel botonModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -319,11 +427,12 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField testFieldConsultado;
     private javax.swing.JTextArea textAreaResultado;
+    private javax.swing.JTextField textFieldConsultado;
     private javax.swing.JTextField textFieldFechaExamen;
     private javax.swing.JTextField textFieldFechaResultado;
-    private javax.swing.JTextField textFieldIdPatient;
+    private javax.swing.JSpinner textFieldIdExam;
+    private javax.swing.JSpinner textFieldIdPatient;
     private javax.swing.JTextField textFieldTipoExamen;
     // End of variables declaration//GEN-END:variables
 }

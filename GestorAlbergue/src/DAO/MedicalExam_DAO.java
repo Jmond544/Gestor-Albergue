@@ -17,7 +17,7 @@ public class MedicalExam_DAO {
     
     public String agregarMedicalExam(Connection con, MedicalExam medicalExam){
         PreparedStatement pst = null;
-        String sql = "INSERT INTO Medical_Exam (idPatient, typeExam, dateExam, dateResults, results) " +
+        String sql = "INSERT INTO ALBERGUE.Medical_Exam (idPatient, typeExam, dateExam, dateResults, results) " +
                      "VALUES (?, ?, TO_DATE(?, 'DD/MM/YYYY'), TO_DATE(?, 'DD/MM/YYYY'), ?)";
 
         try {
@@ -39,7 +39,7 @@ public class MedicalExam_DAO {
 
     public String modificarMedicalExam(Connection con, MedicalExam medicalExam){
         PreparedStatement pst = null;
-        String sql = "UPDATE Medical_Exam SET idPatient = ?, typeExam = ?, dateExam = TO_DATE(?, 'DD/MM/YYYY'), " +
+        String sql = "UPDATE ALBERGUE.Medical_Exam SET idPatient = ?, typeExam = ?, dateExam = TO_DATE(?, 'DD/MM/YYYY'), " +
                      "dateResults = TO_DATE(?, 'DD/MM/YYYY'), results = ? WHERE idMedical_Exam = ?";
 
         try {
@@ -67,7 +67,7 @@ public class MedicalExam_DAO {
 
     public String eliminarMedicalExam(Connection con, int id){
         PreparedStatement pst = null;
-        String sql = "DELETE FROM Medical_Exam WHERE idMedical_Exam = ?";
+        String sql = "DELETE FROM ALBERGUE.Medical_Exam WHERE idMedical_Exam = ?";
 
         try {
             pst = con.prepareStatement(sql);
@@ -92,7 +92,7 @@ public class MedicalExam_DAO {
         String [] columnas = {"ID","IdPatient","TypeExam", "DateExam", "DateResults", "Results"};
         model = new DefaultTableModel(null,columnas);
         
-        String sql = "SELECT * FROM Medical_Exam ORDER BY idMedical_Exam;";
+        String sql = "SELECT * FROM ALBERGUE.Medical_Exam ORDER BY idMedical_Exam";
         
         String [] filas = new String[6];
         Statement st = null;
@@ -110,6 +110,7 @@ public class MedicalExam_DAO {
             tabla.setModel(model);
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "No se puede listar la tabla");
+            System.out.println(e.getMessage());
         }
     }
 }
