@@ -1,22 +1,36 @@
 
 package GUI;
 
+import CRUD.Frm_Medical_Exam;
+import java.awt.BorderLayout;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JPanel;
 
 
 public class ScreenCrudTables extends javax.swing.JPanel {
 
     private Connection conexion;
+    private JPanel [] listaCruds;
     
     public ScreenCrudTables(Connection conexion) {
         this.conexion = conexion;
+        listaCruds = new JPanel[]{null,null,null,null,null,null,new Frm_Medical_Exam(conexion)};
         initComponents();
         inicializarComboBox();
+    }
+    
+    private void showPanel(JPanel p){
+        p.setSize(785, 650);
+        p.setLocation(0, 0);
+        dinamicPanel.removeAll();
+        dinamicPanel.add(p, BorderLayout.CENTER);
+        dinamicPanel.revalidate();
+        dinamicPanel.repaint();
     }
 
     private void inicializarComboBox(){
@@ -124,7 +138,10 @@ public class ScreenCrudTables extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
-        System.out.println(comboBox.getSelectedItem());
+        int index = comboBox.getSelectedIndex();
+        if(index == 6){
+            showPanel(listaCruds[6]);
+        }
     }//GEN-LAST:event_comboBoxActionPerformed
 
 

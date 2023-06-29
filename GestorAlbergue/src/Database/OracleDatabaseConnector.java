@@ -10,7 +10,7 @@ public class OracleDatabaseConnector {
     private String url;
     private String username;
     private String password;
-    private Connection connection;
+    private static Connection connection;
 
     public OracleDatabaseConnector(String username, String password) {
         this.url = "jdbc:oracle:thin:@localhost:1521:orcl";
@@ -51,7 +51,7 @@ public class OracleDatabaseConnector {
         return resultSet;
     }
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         return connection;
     }
     
