@@ -350,11 +350,11 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
             
             MedicalExam medicalExam = new MedicalExam();
             try {
-                medicalExam.setIdPatient((int)textFieldIdPatient.getValue());
+                medicalExam.setIdPatient((int) textFieldIdPatient.getValue());
                 medicalExam.setTypeExam(textFieldTipoExamen.getText());
                 medicalExam.setDateExam(textFieldFechaExamen.getText());
                 medicalExam.setDateResults(textFieldFechaResultado.getText());
-                medicalExam.setDateResults(textAreaResultado.getText());
+                medicalExam.setResults(textAreaResultado.getText());
                 String mensaje = me_BO.agregarMedicalExam(medicalExam);
                 JOptionPane.showMessageDialog(null, mensaje);
                 limpiar();
