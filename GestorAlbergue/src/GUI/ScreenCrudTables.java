@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 
@@ -15,11 +16,11 @@ import javax.swing.JPanel;
 public class ScreenCrudTables extends javax.swing.JPanel {
 
     private Connection conexion;
-    private JPanel [] listaCruds;
+    private ArrayList<JPanel> listaCruds;
     
     public ScreenCrudTables(Connection conexion) {
         this.conexion = conexion;
-        listaCruds = new JPanel[]{null,null,null,null,null,null,new Frm_Medical_Exam(conexion)};
+        listaCruds = new ArrayList<>();
         initComponents();
         inicializarComboBox();
     }
@@ -50,6 +51,7 @@ public class ScreenCrudTables extends javax.swing.JPanel {
             while (resultSet.next()) {
                 String tableName = resultSet.getString("TABLE_NAME");
                 comboBox.addItem(tableName);
+                inicializadorPaneles(tableName);
             }
 
             // Cerrar los recursos
@@ -59,6 +61,56 @@ public class ScreenCrudTables extends javax.swing.JPanel {
             e.printStackTrace();
         }
         
+    }
+    
+    private void inicializadorPaneles(String tableName){
+        switch (tableName) {
+            case "ATTORNEY":
+                listaCruds.add(null);
+                break;
+            case "CLINIC_HISTORY":
+                listaCruds.add(null);
+                break;
+            case "PATIENT":
+                listaCruds.add(null);
+                break;
+            case "MEDICAL_EXAM":
+                listaCruds.add(new Frm_Medical_Exam(conexion));
+                break;
+            case "AREA":
+                listaCruds.add(null);
+                break;
+            case "EMPLOYEE":
+                listaCruds.add(null);
+                break;
+            case "VOLUNTEER":
+                listaCruds.add(null);
+                break;
+            case "VOLUNTEERPATIENT":
+                listaCruds.add(null);
+                break;
+            case "SUPPLIER":
+                listaCruds.add(null);
+                break;
+            case "PURCHASE":
+                listaCruds.add(null);
+                break;
+            case "DONOR":
+                listaCruds.add(null);
+                break;
+            case "MONETARYDONATION":
+                listaCruds.add(null);
+                break;
+            case "MATERIALDONATION":
+                listaCruds.add(null);
+                break;
+            case "NECESSITY":
+                listaCruds.add(null);
+                break;
+            
+            default:
+                throw new AssertionError();
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -139,8 +191,9 @@ public class ScreenCrudTables extends javax.swing.JPanel {
 
     private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
         int index = comboBox.getSelectedIndex();
+        String optionDelected = comboBox.getSelectedItem().toString();
         if(index == 6){
-            showPanel(listaCruds[6]);
+            showPanel(listaCruds.get(index));
         }
     }//GEN-LAST:event_comboBoxActionPerformed
 
