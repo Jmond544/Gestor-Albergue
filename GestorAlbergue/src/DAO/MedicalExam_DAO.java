@@ -92,7 +92,16 @@ public class MedicalExam_DAO {
         String [] columnas = {"ID","IdPatient","TypeExam", "DateExam", "DateResults", "Results"};
         model = new DefaultTableModel(null,columnas);
         
-        String sql = "SELECT * FROM ALBERGUE.Medical_Exam ORDER BY idMedical_Exam";
+        String sql = "SELECT " +
+             "IDMEDICAL_EXAM, " +
+             "IDPATIENT, " +
+             "TYPEEXAM, " +
+             "TO_CHAR(DATEEXAM, 'DD/MM/YYYY') AS DATEEXAM, " +
+             "TO_CHAR(DATERESULTS, 'DD/MM/YYYY') AS DATERESULTS, " +
+             "RESULTS " +
+             "FROM ALBERGUE.Medical_Exam " +
+             "ORDER BY IDMEDICAL_EXAM";
+
         
         String [] filas = new String[6];
         Statement st = null;
