@@ -2,7 +2,11 @@
 package CRUD;
 
 import BO.MedicalExam_BO;
+import Database.OracleDatabaseConnector;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import Entity.*;
 
@@ -240,6 +244,12 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
+        textFieldIdPatient.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                textFieldIdPatientStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -380,7 +390,7 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
                 medicalExam.setTypeExam(textFieldTipoExamen.getText());
                 medicalExam.setDateExam(textFieldFechaExamen.getText());
                 medicalExam.setDateResults(textFieldFechaResultado.getText());
-                medicalExam.setDateResults(textAreaResultado.getText());
+                medicalExam.setResults(textAreaResultado.getText());
                 String mensaje = me_BO.modificarMedicalExam(medicalExam);
                 JOptionPane.showMessageDialog(null, mensaje);
                 limpiar();
@@ -405,6 +415,34 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_botonEliminarMouseClicked
+
+    private void textFieldIdPatientStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_textFieldIdPatientStateChanged
+        Connection con = OracleDatabaseConnector.getConnection();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "SELECT DNIPATIENT, NAMESPATIENT || ', ' || SURNAMESPATIENT AS ALL_NAME, DIAGNOSIS " +
+                         "FROM ALBERGUE.PATIENT " +
+                         "WHERE IDPATIENT = ?";
+            pst = con.prepareStatement(sql);
+            pst.setInt(1, (int) textFieldIdPatient.getValue());
+
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                String dni = rs.getString("DNIPATIENT");
+                String nombreCompleto = rs.getString("ALL_NAME");
+                String diagnostico = rs.getString("DIAGNOSIS");
+                
+                textFieldConsultado.setText(dni + "; " + nombreCompleto + "; " + diagnostico);
+            } else {
+                textFieldConsultado.setText("Paciente no existe.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al ejecutar la consulta: " + e.getMessage());
+        }
+    }//GEN-LAST:event_textFieldIdPatientStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

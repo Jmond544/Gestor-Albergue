@@ -481,6 +481,9 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JSpinner" name="textFieldIdPatient">
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="textFieldIdPatientStateChanged"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSpinner" name="textFieldIdExam">
     </Component>
