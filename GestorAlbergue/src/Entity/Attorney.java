@@ -20,6 +20,11 @@ public class Attorney {
         this.socialConditions = socialConditions;
     }
 
+    public Attorney() {
+    }
+    
+    
+
     public int getIdAttorney() {
         return idAttorney;
     }

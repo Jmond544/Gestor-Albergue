@@ -21,6 +21,11 @@ public class Patient {
         this.diagnosis = diagnosis;
     }
 
+    public Patient() {
+    }
+    
+    
+
     public int getIdPatient() {
         return idPatient;
     }

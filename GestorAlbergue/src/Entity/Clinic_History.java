@@ -9,6 +9,11 @@ public class Clinic_History {
         this.updatedClinic_History = updatedClinic_History;
     }
 
+    public Clinic_History() {
+    }
+    
+    
+
     public int getIdClinic_History() {
         return idClinic_History;
     }

@@ -1,7 +1,9 @@
 package CRUD;
 
 import BO.Patient_BO;
+import Entity.Patient;
 import java.sql.Connection;
+import java.util.HashSet;
 import javax.swing.JOptionPane;
 
 public class Frm_Paciente extends javax.swing.JFrame {
@@ -153,6 +155,11 @@ public class Frm_Paciente extends javax.swing.JFrame {
         );
 
         jPanel7.setBackground(new java.awt.Color(229, 107, 111));
+        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonAgregar(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
@@ -169,10 +176,15 @@ public class Frm_Paciente extends javax.swing.JFrame {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
         );
 
         jPanel8.setBackground(new java.awt.Color(229, 107, 111));
+        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonModificar(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
@@ -187,10 +199,17 @@ public class Frm_Paciente extends javax.swing.JFrame {
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addGap(0, 21, Short.MAX_VALUE)
+                .addComponent(jLabel9))
         );
 
         jPanel9.setBackground(new java.awt.Color(229, 107, 111));
+        jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButtonLimpiar(evt);
+            }
+        });
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(0, 0, 0));
@@ -205,7 +224,7 @@ public class Frm_Paciente extends javax.swing.JFrame {
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
         );
 
         jTblPat.setModel(new javax.swing.table.DefaultTableModel(
@@ -365,10 +384,10 @@ public class Frm_Paciente extends javax.swing.JFrame {
             this.txtApoderado.setValue(idApo);
             this.txtHistoria.setValue(idHist);
             this.txtDNI.setText(this.jTblPat.getValueAt(rowSelected, 3).toString());
-            this.txtNombre.setText(this.jTblPat.getValueAt(rowSelected,4 ).toString());
-            this.txtApellidos.setText(this.jTblPat.getValueAt(rowSelected,5 ).toString());
-            this.txtEdad.setText(this.jTblPat.getValueAt(rowSelected,6 ).toString());
-            this.txtDiagnostico.setText(this.jTblPat.getValueAt(rowSelected,7 ).toString());
+            this.txtNombre.setText(this.jTblPat.getValueAt(rowSelected, 4).toString());
+            this.txtApellidos.setText(this.jTblPat.getValueAt(rowSelected, 5).toString());
+            this.txtEdad.setText(this.jTblPat.getValueAt(rowSelected, 6).toString());
+            this.txtDiagnostico.setText(this.jTblPat.getValueAt(rowSelected, 7).toString());
         } catch (NumberFormatException e) {
             System.out.println("Error al convertir los valores: " + e.getMessage());
         } catch (Exception e) {
@@ -376,15 +395,68 @@ public class Frm_Paciente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTblPatMousePressed
 
+    private void ButtonLimpiar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonLimpiar
+        this.limpiar();
+    }//GEN-LAST:event_ButtonLimpiar
+
+    private void buttonAgregar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAgregar
+        if (this.txtApoderado.getValue() == null
+                || this.txtHistoria.getValue() == null
+                || this.txtDNI.getText().isEmpty()
+                || this.txtNombre.getText().isEmpty()
+                || this.txtApellidos.getText().isEmpty()
+                || this.txtEdad.getText().isEmpty()
+                || this.txtDiagnostico.getText().isEmpty())
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos.");
+        else {
+            Patient patient = new Patient();
+            try {
+                patient.setIdPatient((int) this.txtID.getValue());
+                patient.setIdAttorney((int) this.txtApoderado.getValue());
+                patient.setIdClinic_History((int) this.txtHistoria.getValue());
+                patient.setDniPatient(this.txtDNI.getText());
+                patient.setNamesPatient(this.txtNombre.getText());
+                patient.setSurnamesPatient(this.txtApellidos.getText());
+                patient.setAgePatient(Integer.parseInt(this.txtEdad.getText()));
+                patient.setDiagnosis(this.txtDiagnostico.getText());
+                String mensaje = pa_BO.agregarPatient(patient);
+                JOptionPane.showMessageDialog(null, mensaje);
+                this.limpiar();
+                this.listarPatients();
+            } catch (Exception e) {
+
+            }
+        }
+    }//GEN-LAST:event_buttonAgregar
+
+    private void buttonModificar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonModificar
+        if (this.txtApoderado.getValue() == null
+                || this.txtHistoria.getValue() == null
+                || this.txtDNI.getText().isEmpty()
+                || this.txtNombre.getText().isEmpty()
+                || this.txtApellidos.getText().isEmpty()
+                || this.txtEdad.getText().isEmpty()
+                || this.txtDiagnostico.getText().isEmpty())
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos.");
+        else {
+            Patient patient = new Patient();
+            try {
+                
+            }
+            catch(Exception e){
+            
+            }
+        }
+    }//GEN-LAST:event_buttonModificar
+
+    
+    
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TBFormulario;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -393,32 +465,18 @@ public class Frm_Paciente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTblPat;
-    private javax.swing.JTextArea textAreaResultado;
-    private javax.swing.JTextField textFieldConsultado;
-    private javax.swing.JTextField textFieldFechaExamen;
-    private javax.swing.JTextField textFieldFechaResultado;
-    private javax.swing.JTextField textFieldTipoExamen;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JSpinner txtApoderado;
     private javax.swing.JTextField txtDNI;
