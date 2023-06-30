@@ -2,7 +2,11 @@
 package CRUD;
 
 import BO.MedicalExam_BO;
+import Database.OracleDatabaseConnector;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import Entity.*;
 
@@ -19,7 +23,7 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
     }
 
     private void listarMedical_Exam(){
-        me_BO.listarMedicalExam(TBEmpleado);
+        me_BO.listarMedicalExam(TBFormulario);
     }
     
     private void limpiar(){
@@ -50,7 +54,7 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
         textAreaResultado = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TBEmpleado = new javax.swing.JTable();
+        TBFormulario = new javax.swing.JTable();
         botonAgregar = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         botonModificar = new javax.swing.JPanel();
@@ -135,7 +139,7 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Resultados del examen:");
 
-        TBEmpleado.setModel(new javax.swing.table.DefaultTableModel(
+        TBFormulario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -146,7 +150,12 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
 
             }
         ));
-        jScrollPane2.setViewportView(TBEmpleado);
+        TBFormulario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                TBFormularioMousePressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(TBFormulario);
 
         botonAgregar.setBackground(new java.awt.Color(181, 101, 118));
         botonAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -239,6 +248,12 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
             botonLimpiarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
+
+        textFieldIdPatient.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                textFieldIdPatientStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -380,7 +395,7 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
                 medicalExam.setTypeExam(textFieldTipoExamen.getText());
                 medicalExam.setDateExam(textFieldFechaExamen.getText());
                 medicalExam.setDateResults(textFieldFechaResultado.getText());
-                medicalExam.setDateResults(textAreaResultado.getText());
+                medicalExam.setResults(textAreaResultado.getText());
                 String mensaje = me_BO.modificarMedicalExam(medicalExam);
                 JOptionPane.showMessageDialog(null, mensaje);
                 limpiar();
@@ -406,9 +421,56 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_botonEliminarMouseClicked
 
+    private void textFieldIdPatientStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_textFieldIdPatientStateChanged
+        Connection con = OracleDatabaseConnector.getConnection();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "SELECT DNIPATIENT, NAMESPATIENT || ', ' || SURNAMESPATIENT AS ALL_NAME, DIAGNOSIS " +
+                         "FROM ALBERGUE.PATIENT " +
+                         "WHERE IDPATIENT = ?";
+            pst = con.prepareStatement(sql);
+            pst.setInt(1, (int) textFieldIdPatient.getValue());
+
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                String dni = rs.getString("DNIPATIENT");
+                String nombreCompleto = rs.getString("ALL_NAME");
+                String diagnostico = rs.getString("DIAGNOSIS");
+                
+                textFieldConsultado.setText(dni + "; " + nombreCompleto + "; " + diagnostico);
+            } else {
+                textFieldConsultado.setText("Paciente no existe.");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al ejecutar la consulta:\n" + e.getMessage());
+        }
+    }//GEN-LAST:event_textFieldIdPatientStateChanged
+
+    private void TBFormularioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBFormularioMousePressed
+        int rowSelected = TBFormulario.getSelectedRow();
+        System.out.println(rowSelected);
+        try {
+            int idExam = Integer.parseInt(TBFormulario.getValueAt(rowSelected, 0).toString());
+            int idPatient = Integer.parseInt(TBFormulario.getValueAt(rowSelected, 1).toString());
+            textFieldIdExam.setValue(idExam);
+            textFieldIdPatient.setValue(idPatient);
+            textFieldTipoExamen.setText(TBFormulario.getValueAt(rowSelected, 2).toString());
+            textFieldFechaExamen.setText(TBFormulario.getValueAt(rowSelected, 3).toString());
+            textFieldFechaResultado.setText(TBFormulario.getValueAt(rowSelected, 4).toString());
+            textAreaResultado.setText(TBFormulario.getValueAt(rowSelected, 5).toString());
+        } catch (NumberFormatException e) {
+            System.out.println("Error al convertir los valores: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_TBFormularioMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TBEmpleado;
+    private javax.swing.JTable TBFormulario;
     private javax.swing.JPanel botonAgregar;
     private javax.swing.JPanel botonEliminar;
     private javax.swing.JPanel botonLimpiar;
