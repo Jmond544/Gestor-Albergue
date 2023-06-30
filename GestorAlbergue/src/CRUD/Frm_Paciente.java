@@ -137,11 +137,16 @@ public class Frm_Paciente extends javax.swing.JFrame {
         txtDiagnostico.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
         jPanel6.setBackground(new java.awt.Color(229, 107, 111));
+        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonEliminar(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("Modificar");
+        jLabel10.setText("Eliminar");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -151,7 +156,7 @@ public class Frm_Paciente extends javax.swing.JFrame {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
         );
 
         jPanel7.setBackground(new java.awt.Color(229, 107, 111));
@@ -199,9 +204,7 @@ public class Frm_Paciente extends javax.swing.JFrame {
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addGap(0, 21, Short.MAX_VALUE)
-                .addComponent(jLabel9))
+            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
         );
 
         jPanel9.setBackground(new java.awt.Color(229, 107, 111));
@@ -441,13 +444,40 @@ public class Frm_Paciente extends javax.swing.JFrame {
         else {
             Patient patient = new Patient();
             try {
-                
+                patient.setIdPatient((int) this.txtID.getValue());
+                patient.setIdAttorney((int) this.txtApoderado.getValue());
+                patient.setIdClinic_History((int) this.txtHistoria.getValue());
+                patient.setDniPatient(this.txtDNI.getText());
+                patient.setNamesPatient(this.txtNombre.getText());
+                patient.setSurnamesPatient(this.txtApellidos.getText());
+                patient.setAgePatient(Integer.parseInt(this.txtEdad.getText()));
+                patient.setDiagnosis(this.txtDiagnostico.getText());
+                String mensaje = pa_BO.modificarPatient(patient);
+                JOptionPane.showMessageDialog(null, mensaje);
+                this.limpiar();
+                this.listarPatients();
             }
             catch(Exception e){
             
             }
         }
     }//GEN-LAST:event_buttonModificar
+
+    private void buttonEliminar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonEliminar
+        if(this.txtID.getValue() == null){
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos.");
+        } else{
+            try {
+                int index = (int) this.txtID.getValue();
+                String mensaje = pa_BO.eliminarPatient(index);
+                JOptionPane.showMessageDialog(null, mensaje);
+                this.limpiar();
+                this.listarPatients();
+            } catch (Exception e){
+                
+            }
+        }
+    }//GEN-LAST:event_buttonEliminar
 
     
     
