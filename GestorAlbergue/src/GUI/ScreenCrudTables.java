@@ -1,7 +1,7 @@
 
 package GUI;
 
-import CRUD.Frm_Medical_Exam;
+import CRUD.*;
 import java.awt.BorderLayout;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -72,7 +72,7 @@ public class ScreenCrudTables extends javax.swing.JPanel {
                 listaCruds.add(null);
                 break;
             case "PATIENT":
-                listaCruds.add(null);
+                listaCruds.add(this.convertirAPanel(new Frm_Paciente(conexion)));
                 break;
             case "MEDICAL_EXAM":
                 listaCruds.add(new Frm_Medical_Exam(conexion));
@@ -111,6 +111,23 @@ public class ScreenCrudTables extends javax.swing.JPanel {
             default:
                 throw new AssertionError();
         }
+    }
+    
+    public JPanel convertirAPanel(Frm_Paciente frm){
+        JPanel panel = new JPanel();
+
+        
+        panel.setLayout(frm.getLayout());
+        panel.setBackground(frm.getBackground());
+        panel.setForeground(frm.getForeground());
+        panel.setFont(frm.getFont());
+
+        System.out.println("Bv");
+        for (java.awt.Component componente : frm.getContentPane().getComponents()) {
+            panel.add(componente);
+        }
+
+        return panel;
     }
     
     @SuppressWarnings("unchecked")
@@ -192,6 +209,9 @@ public class ScreenCrudTables extends javax.swing.JPanel {
     private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
         int index = comboBox.getSelectedIndex();
         if(index == 6){
+            showPanel(listaCruds.get(index));
+        }
+        if(index == 9){
             showPanel(listaCruds.get(index));
         }
     }//GEN-LAST:event_comboBoxActionPerformed

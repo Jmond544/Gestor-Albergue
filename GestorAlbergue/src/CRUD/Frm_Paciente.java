@@ -350,8 +350,8 @@ public class Frm_Paciente extends javax.swing.JFrame {
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -427,7 +427,7 @@ public class Frm_Paciente extends javax.swing.JFrame {
                 this.limpiar();
                 this.listarPatients();
             } catch (Exception e) {
-
+                System.out.println("Error al insertar");
             }
         }
     }//GEN-LAST:event_buttonAgregar
@@ -458,7 +458,7 @@ public class Frm_Paciente extends javax.swing.JFrame {
                 this.listarPatients();
             }
             catch(Exception e){
-            
+                System.out.println("Error al Modificar");
             }
         }
     }//GEN-LAST:event_buttonModificar
@@ -474,11 +474,11 @@ public class Frm_Paciente extends javax.swing.JFrame {
                 this.limpiar();
                 this.listarPatients();
             } catch (Exception e){
-                
+                System.out.println("Error al Eliminar");
             }
         }
     }//GEN-LAST:event_buttonEliminar
-
+    
     
     
     /**
