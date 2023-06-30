@@ -191,7 +191,6 @@ public class ScreenCrudTables extends javax.swing.JPanel {
 
     private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
         int index = comboBox.getSelectedIndex();
-        String optionDelected = comboBox.getSelectedItem().toString();
         if(index == 6){
             showPanel(listaCruds.get(index));
         }

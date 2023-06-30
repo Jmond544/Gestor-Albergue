@@ -451,7 +451,6 @@ public class Frm_Medical_Exam extends javax.swing.JPanel {
 
     private void TBFormularioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBFormularioMousePressed
         int rowSelected = TBFormulario.getSelectedRow();
-        System.out.println(rowSelected);
         try {
             int idExam = Integer.parseInt(TBFormulario.getValueAt(rowSelected, 0).toString());
             int idPatient = Integer.parseInt(TBFormulario.getValueAt(rowSelected, 1).toString());
