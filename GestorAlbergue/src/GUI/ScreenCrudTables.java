@@ -103,10 +103,10 @@ public class ScreenCrudTables extends javax.swing.JPanel {
                 listaCruds.add(new FrmMonetaryDonation());
                 break;
             case "MATERIALDONATION":
-                listaCruds.add(null);
+                listaCruds.add(new Frm_MaterialDonation(conexion));
                 break;
             case "NECESSITY":
-                listaCruds.add(null);
+                listaCruds.add(new Frm_Necessity(conexion));
                 break;
             
             default:
