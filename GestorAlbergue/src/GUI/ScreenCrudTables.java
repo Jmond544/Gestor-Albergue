@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
@@ -66,7 +67,7 @@ public class ScreenCrudTables extends javax.swing.JPanel {
     private void inicializadorPaneles(String tableName){
         switch (tableName) {
             case "ATTORNEY":
-                listaCruds.add(null);
+                listaCruds.add(this.convertirAPanel(new Frm_Attorney(conexion)));
                 break;
             case "CLINIC_HISTORY":
                 listaCruds.add(null);
@@ -113,7 +114,7 @@ public class ScreenCrudTables extends javax.swing.JPanel {
         }
     }
     
-    public JPanel convertirAPanel(Frm_Paciente frm){
+    public JPanel convertirAPanel(JFrame frm){
         JPanel panel = new JPanel();
 
         
@@ -122,7 +123,6 @@ public class ScreenCrudTables extends javax.swing.JPanel {
         panel.setForeground(frm.getForeground());
         panel.setFont(frm.getFont());
 
-        System.out.println("Bv");
         for (java.awt.Component componente : frm.getContentPane().getComponents()) {
             panel.add(componente);
         }
@@ -212,6 +212,9 @@ public class ScreenCrudTables extends javax.swing.JPanel {
             showPanel(listaCruds.get(index));
         }
         if(index == 9){
+            showPanel(listaCruds.get(index));
+        }
+        if(index == 1){
             showPanel(listaCruds.get(index));
         }
     }//GEN-LAST:event_comboBoxActionPerformed

@@ -40,7 +40,7 @@ public class Attorney_DAO {
     public String modificarAttorney(Connection con, Attorney attorney){
         PreparedStatement pst = null;
         String sql = "UPDATE ALBERGUE.Attorney SET dniAttorney = ?, namesAttorney = ?, surnamesAttorney = ?, employmentSituation = ?, "
-                + "civilStatus = ?, socialConditions = ?, levelStudy = ? WHERE = ?";
+                + "civilStatus = ?, socialConditions = ?, levelStudy = ? WHERE idAttorney = ?";
         
         try{
             pst = con.prepareStatement(sql);
@@ -94,14 +94,14 @@ public class Attorney_DAO {
         String [] columnas = {"ID","dniAttorney","namesAttorney","surnamesAttorney","employmentSituation","civilStatus","socialConditions","levelStudy"};
         model = new DefaultTableModel(null,columnas);
         String sql = "SELECT " +
-                "idAttorney" +
-                "dniAttorney" +
-                "namesAttorney" +
-                "surnamesAttorney" +
-                "employmentSituation" +
-                "civilStatus" +
-                "socialConditions" +
-                "levelStudy" +
+                "idAttorney," +
+                "dniAttorney," +
+                "namesAttorney," +
+                "surnamesAttorney," +
+                "employmentSituation," +
+                "civilStatus," +
+                "socialConditions," +
+                "levelStudy " +
                 "FROM ALBERGUE.Attorney "+
                 "ORDER BY idAttorney";
         String [] filas = new String[8];

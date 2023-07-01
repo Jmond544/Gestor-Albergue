@@ -49,7 +49,7 @@
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                           <Component id="btnAgregar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="53" max="32767" attributes="0"/>
                           <Component id="btnModificar" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -58,8 +58,8 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txtSLaboral" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="27" max="32767" attributes="0"/>
+                                  <Component id="txtSLaboral" max="32767" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="txtECivil" min="-2" pref="71" max="-2" attributes="0"/>
@@ -314,6 +314,9 @@
               <Color blue="6f" green="6b" red="e5" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botonAgregar"/>
+          </Events>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -348,6 +351,9 @@
               <Color blue="6f" green="6b" red="e5" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botonModificar"/>
+          </Events>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -382,6 +388,9 @@
               <Color blue="6f" green="6b" red="e5" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botonLimpiar"/>
+          </Events>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -416,6 +425,9 @@
               <Color blue="6f" green="6b" red="e5" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botonEliminar"/>
+          </Events>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -462,6 +474,9 @@
                   </Table>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblApoderadoMousePressed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -23,7 +23,7 @@ public class Attorney_BO {
         return mensaje;
     }
     
-    public String modificarMedicalExam(Attorney attorney){
+    public String modificarAttorney(Attorney attorney){
         Connection conn = OracleDatabaseConnector.getConnection();
         try{
             mensaje = atDao.modificarAttorney(conn, attorney);
