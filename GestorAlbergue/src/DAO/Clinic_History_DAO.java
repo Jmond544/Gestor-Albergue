@@ -83,7 +83,7 @@ public class Clinic_History_DAO {
         
         String sql = "SELECT " +
              "idClinic_History, " +
-             "updatedClinic_History, " +
+             "updatedClinic_History " +
              "FROM ALBERGUE.Clinic_History " +
              "ORDER BY idClinic_History";
 
