@@ -1,47 +1,48 @@
-
 package BO;
-import DAO.Attorney_DAO;
-import Entity.*;
+
+import DAO.EmployeeDAO;
+import Entity.Employee;
 import Database.OracleDatabaseConnector;
 import java.sql.Connection;
 import javax.swing.JTable;
 
-public class Attorney_BO {
+public class EmployeeBO {
     private String mensaje = "";
-    private Attorney_DAO atDao = new Attorney_DAO();
+    private EmployeeDAO employeeDAO = new EmployeeDAO();
     
-    public String agregarAttorney(Attorney attorney){
+    public String agregarEmployee(Employee employee){
         Connection conn = OracleDatabaseConnector.getConnection();
         try{
-            mensaje = atDao.agregarAttorney(conn, attorney);
+            mensaje = employeeDAO.agregarEmployee(conn, employee);
         } catch (Exception ex) {
             mensaje = mensaje + " " + ex.getMessage();
         } 
         return mensaje;
     }
     
-    public String modificarAttorney(Attorney attorney){
+    public String modificarEmployee(Employee employee){
         Connection conn = OracleDatabaseConnector.getConnection();
         try{
-            mensaje = atDao.modificarAttorney(conn, attorney);
+            mensaje = employeeDAO.modificarEmployee(conn, employee);
         } catch (Exception ex) {
             mensaje = mensaje + " " + ex.getMessage();
         }
         return mensaje;
     }
     
-    public String eliminarAttorney(int id){
+    public String eliminarEmployee(int id){
         Connection conn = OracleDatabaseConnector.getConnection();
         try{
-            mensaje = atDao.eliminarAttorney(conn, id);
+            mensaje = employeeDAO.eliminarEmployee(conn, id);
         } catch (Exception ex) {
             mensaje = mensaje + " " + ex.getMessage();
         }
         return mensaje;
     }
     
-    public void listarAttorney(JTable tabla){
+    public void listarEmployee(JTable tabla){
         Connection conn = OracleDatabaseConnector.getConnection();
-        atDao.listarAttorney(conn, tabla);
+        employeeDAO.listarEmployee(conn, tabla);
     }
 }
+
