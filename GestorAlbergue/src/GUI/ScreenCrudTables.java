@@ -70,7 +70,7 @@ public class ScreenCrudTables extends javax.swing.JPanel {
                 listaCruds.add(this.convertirAPanel(new Frm_Attorney(conexion)));
                 break;
             case "CLINIC_HISTORY":
-                listaCruds.add(null);
+                listaCruds.add(this.convertirAPanel(new Frm_ClinicHistory(conexion)));
                 break;
             case "PATIENT":
                 listaCruds.add(this.convertirAPanel(new Frm_Paciente(conexion)));
@@ -215,6 +215,9 @@ public class ScreenCrudTables extends javax.swing.JPanel {
             showPanel(listaCruds.get(index));
         }
         if(index == 1){
+            showPanel(listaCruds.get(index));
+        }
+        if(index == 2){
             showPanel(listaCruds.get(index));
         }
     }//GEN-LAST:event_comboBoxActionPerformed
