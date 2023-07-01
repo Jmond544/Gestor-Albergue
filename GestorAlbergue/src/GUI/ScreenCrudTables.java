@@ -85,10 +85,10 @@ public class ScreenCrudTables extends javax.swing.JPanel {
                 listaCruds.add(null);
                 break;
             case "VOLUNTEER":
-                listaCruds.add(null);
+                listaCruds.add(new FrmVolunteer(conexion));
                 break;
             case "VOLUNTEERPATIENT":
-                listaCruds.add(null);
+                listaCruds.add(new FrmVolunteerPatient(conexion));
                 break;
             case "SUPPLIER":
                 listaCruds.add(new Frm_Supplier(conexion));
