@@ -97,10 +97,10 @@ public class ScreenCrudTables extends javax.swing.JPanel {
                 listaCruds.add(null);
                 break;
             case "DONOR":
-                listaCruds.add(null);
+                listaCruds.add(this.convertirAPanel(new FrmDonor()));
                 break;
             case "MONETARYDONATION":
-                listaCruds.add(null);
+                listaCruds.add(new FrmMonetaryDonation());
                 break;
             case "MATERIALDONATION":
                 listaCruds.add(null);
@@ -208,13 +208,7 @@ public class ScreenCrudTables extends javax.swing.JPanel {
 
     private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
         int index = comboBox.getSelectedIndex();
-        if(index == 6){
-            showPanel(listaCruds.get(index));
-        }
-        if(index == 9){
-            showPanel(listaCruds.get(index));
-        }
-        if(index == 1){
+        if(index >= 0 && index<listaCruds.size()){
             showPanel(listaCruds.get(index));
         }
     }//GEN-LAST:event_comboBoxActionPerformed
