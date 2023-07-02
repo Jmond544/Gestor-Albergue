@@ -3,6 +3,7 @@ package GUI;
 
 import Database.OracleDatabaseConnector;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 
@@ -50,6 +51,9 @@ public class Login extends javax.swing.JFrame {
         textFieldUsuario.setText("User");
         textFieldUsuario.setBorder(null);
         textFieldUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textFieldUsuarioKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 textFieldUsuarioKeyTyped(evt);
             }
@@ -68,6 +72,11 @@ public class Login extends javax.swing.JFrame {
         fieldPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         fieldPassword.setText("Password");
         fieldPassword.setBorder(null);
+        fieldPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fieldPasswordKeyPressed(evt);
+            }
+        });
         jPanel1.add(fieldPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, 220, -1));
 
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
@@ -163,6 +172,34 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_textFieldUsuarioKeyTyped
 
+    private void textFieldUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFieldUsuarioKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            fieldPassword.requestFocus();
+        }
+    }//GEN-LAST:event_textFieldUsuarioKeyPressed
+
+    private void fieldPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldPasswordKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            botonLoginAction();
+        }
+    }//GEN-LAST:event_fieldPasswordKeyPressed
+
+    private void botonLoginAction() {
+        String username = textFieldUsuario.getText();
+        String password = String.valueOf(fieldPassword.getPassword());
+        botonLogin.setBackground(Color.decode("#222222"));
+        oracleDatabaseConnector = new OracleDatabaseConnector(username, password);
+        
+        if(oracleDatabaseConnector.connect()!=null){
+            Dashboard dashBoard = new Dashboard(oracleDatabaseConnector.getConnection());
+            jPanel1.setVisible(false);
+            dispose();
+            dashBoard.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Error al conectar con la base de datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     public void showLogin() {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

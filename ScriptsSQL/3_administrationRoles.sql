@@ -221,10 +221,15 @@ GRANT DELETE ON Necessity TO Shelter_Procurement_Area;
 GRANT EXECUTE ANY PROCEDURE TO Shelter_Procurement_Area;
 
 
-/*Observando todos los roles*/
+/*Observando los roles creados*/
 
-SELECT * FROM dba_roles ORDER BY ROLE;
+SELECT * FROM dba_roles WHERE ROLE LIKE 'SHELTER%' ORDER BY ROLE;
 
+/*Observando los roles correspondientes al usuario actual*/
+SELECT USERNAME, GRANTED_ROLE
+FROM USER_ROLE_PRIVS;
+
+/*CREANDO USUARIOS*/
 /*CREATE USER JUAN IDENTIFIED BY 1234;*/
 GRANT Shelter_Manager TO JUAN;
 
