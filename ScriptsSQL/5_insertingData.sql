@@ -1,3 +1,7 @@
+/*
+Attorney
+*/
+
 INSERT INTO Attorney (dniAttorney, namesAttorney, surnamesAttorney, employmentSituation, civilStatus, socialConditions, levelStudy)
 VALUES ('12345678', 'Jhon', 'Doe', 'EMP', 'S', 'A', 'PH');
 
@@ -30,7 +34,7 @@ VALUES ('25364891', 'Leonardo', 'Castro', 'DES', 'C', 'C', 'BS');
 
 
 /*
-
+Clinic_History
 */
 
 INSERT INTO Clinic_History (updatedClinic_History)
@@ -63,9 +67,8 @@ VALUES ('No');
 INSERT INTO Clinic_History (updatedClinic_History)
 VALUES ('Yes');
 
-SELECT * FROM Clinic_History;
 /*
-
+Patient
 */
 
 INSERT INTO Patient (idAttorney, idClinic_History, dniPatient, namesPatient, surnamesPatient, agePatient, diagNosis)
@@ -99,17 +102,17 @@ INSERT INTO Patient (idAttorney, idClinic_History, dniPatient, namesPatient, sur
 VALUES (10, 10, '12596548', 'Mariana', 'Castro', 16, 'Cancer de pulmon');
 
 /*
-
+Medical_Exam
 */
 
 INSERT INTO Medical_Exam (idPatient, typeExam, dateExam, dateResults, results)
 VALUES (1, 'resonancia magnetica', TO_DATE('15/01/2023', 'DD/MM/YYYY'), TO_DATE('18/01/2023', 'DD/MM/YYYY'), 'Cancer de higado');
 
 INSERT INTO Medical_Exam (idPatient, typeExam, dateExam, dateResults, results)
-VALUES (2, 'ecografia', TO_DATE('10/08/2022', 'DD/MM/YYYY'), TO_DATE('15/08/2022', 'DD/MM/YYYY'), 'Cancer de higado');
+VALUES (2, 'ecografia', TO_DATE('10/03/2023', 'DD/MM/YYYY'), TO_DATE('15/08/2023', 'DD/MM/YYYY'), 'Cancer de higado');
 
 INSERT INTO Medical_Exam (idPatient, typeExam, dateExam, dateResults, results)
-VALUES (3, 'Analisis de sangre', TO_DATE('02/12/2022', 'DD/MM/YYYY'), TO_DATE('05/12/2022', 'DD/MM/YYYY'), 'Leucemia');
+VALUES (3, 'Analisis de sangre', TO_DATE('02/02/2023', 'DD/MM/YYYY'), TO_DATE('05/12/2023', 'DD/MM/YYYY'), 'Leucemia');
 
 INSERT INTO Medical_Exam (idPatient, typeExam, dateExam, dateResults, results)
 VALUES (4, 'Analisis de sangre', TO_DATE('01/01/2023', 'DD/MM/YYYY'), TO_DATE('05/01/2023', 'DD/MM/YYYY'), 'Leucemia');
@@ -121,13 +124,57 @@ INSERT INTO Medical_Exam (idPatient, typeExam, dateExam, dateResults, results)
 VALUES (6, 'tomografia', TO_DATE('25/05/2023', 'DD/MM/YYYY'), TO_DATE('27/05/2023', 'DD/MM/YYYY'), 'Cancer de riñon');
 
 INSERT INTO Medical_Exam (idPatient, typeExam, dateExam, dateResults, results)
-VALUES (7, 'biopsia', TO_DATE('22/06/2022', 'DD/MM/YYYY'), TO_DATE('25/06/2022', 'DD/MM/YYYY'), 'Cancer de piel');
+VALUES (7, 'biopsia', TO_DATE('22/01/2023', 'DD/MM/YYYY'), TO_DATE('25/06/2023', 'DD/MM/YYYY'), 'Cancer de piel');
 
 INSERT INTO Medical_Exam (idPatient, typeExam, dateExam, dateResults, results)
-VALUES (8, 'biopsia', TO_DATE('07/07/2022', 'DD/MM/YYYY'), TO_DATE('10/07/2022', 'DD/MM/YYYY'), 'Cancer de piel');
+VALUES (8, 'biopsia', TO_DATE('07/02/2023', 'DD/MM/YYYY'), TO_DATE('10/07/2023', 'DD/MM/YYYY'), 'Cancer de piel');
 
 INSERT INTO Medical_Exam (idPatient, typeExam, dateExam, dateResults, results)
 VALUES (9, 'tomografia', TO_DATE('01/01/2023', 'DD/MM/YYYY'), TO_DATE('04/01/2023', 'DD/MM/YYYY'), 'Cancer de pulmon');
 
 INSERT INTO Medical_Exam (idPatient, typeExam, dateExam, dateResults, results)
-VALUES (10, 'laparoscopia', TO_DATE('21/12/2022', 'DD/MM/YYYY'), TO_DATE('23/12/2022', 'DD/MM/YYYY'), 'Cancer estomago');
+VALUES (10, 'laparoscopia', TO_DATE('21/2/2023', 'DD/MM/YYYY'), TO_DATE('23/12/2023', 'DD/MM/YYYY'), 'Cancer estomago');
+
+/*
+AREA - EMPLEADO
+*/
+
+ALTER TABLE Area
+DISABLE CONSTRAINT fk_area_supervisor;
+
+INSERT INTO Area (idSupervisor, nameArea, descriptionArea, budgetArea)
+VALUES (1, 'Shelter_Manager', 'Encargado del manejo general del refugio', 50000.00);
+
+INSERT INTO Area (idSupervisor, nameArea, descriptionArea, budgetArea)
+VALUES (2, 'Shelter_Human_Resources', 'Encargado de los recursos humanos del refugio', 30000.00);
+
+INSERT INTO Area (idSupervisor, nameArea, descriptionArea, budgetArea)
+VALUES (3, 'Shelter_Finance', 'Encargado de las finanzas y contabilidad', 40000.00);
+
+INSERT INTO Area (idSupervisor, nameArea, descriptionArea, budgetArea)
+VALUES (4, 'Shelter_Procurement_Area', 'Encargado de las compras y adquisiciones', 20000.00);
+
+
+-- Insertar empleado en el área "Shelter_Manager"
+INSERT INTO Employee (idArea, surnamesEmployee, userName, password, mailContact, cellPhoneNumber, address, dateStartContract, dateEndContract, positionEmployee, salary, benefits)
+VALUES (1, 'Apellido1', 'Usuario1', 'Contraseña1', 'correo1@example.com', '123456789', 'Dirección1', TO_DATE('01/01/2022', 'DD/MM/YYYY'), TO_DATE('31/12/2022', 'DD/MM/YYYY'), 'Posición1', 5000.00, 'Beneficios1');
+
+-- Insertar empleado en el área "Shelter_Human_Resources"
+INSERT INTO Employee (idArea, surnamesEmployee, userName, password, mailContact, cellPhoneNumber, address, dateStartContract, dateEndContract, positionEmployee, salary, benefits)
+VALUES (2, 'Apellido2', 'Usuario2', 'Contraseña2', 'correo2@example.com', '987654321', 'Dirección2', TO_DATE('01/01/2022', 'DD/MM/YYYY'), TO_DATE('31/12/2022', 'DD/MM/YYYY'), 'Posición2', 6000.00, 'Beneficios2');
+
+-- Insertar empleado en el área "Shelter_Finance"
+INSERT INTO Employee (idArea, surnamesEmployee, userName, password, mailContact, cellPhoneNumber, address, dateStartContract, dateEndContract, positionEmployee, salary, benefits)
+VALUES (3, 'Apellido3', 'Usuario3', 'Contraseña3', 'correo3@example.com', '123123123', 'Dirección3', TO_DATE('01/01/2022', 'DD/MM/YYYY'), TO_DATE('31/12/2022', 'DD/MM/YYYY'), 'Posición3', 7000.00, 'Beneficios3');
+
+-- Insertar empleado en el área "Shelter_Procurement_Area"
+INSERT INTO Employee (idArea, surnamesEmployee, userName, password, mailContact, cellPhoneNumber, address, dateStartContract, dateEndContract, positionEmployee, salary, benefits)
+VALUES (4, 'Apellido4', 'Usuario4', 'Contraseña4', 'correo4@example.com', '456789123', 'Dirección4', TO_DATE('01/01/2022', 'DD/MM/YYYY'), TO_DATE('31/12/2022', 'DD/MM/YYYY'), 'Posición4', 8000.00, 'Beneficios4');
+
+ALTER TABLE Area
+ENABLE CONSTRAINT fk_area_supervisor;
+
+SELECT * FROM Area;
+
+DESC AREA;
+DESC EMPLOYEE;
