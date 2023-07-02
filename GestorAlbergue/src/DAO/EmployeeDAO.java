@@ -19,20 +19,21 @@ public class EmployeeDAO {
 
     public String agregarEmployee(Connection con, Employee employee) {
         PreparedStatement pst = null;
-        String sql = "INSERT INTO Employee (idArea, surnamesEmployee, mailContact, cellPhoneNumber, address, dateStartContract, dateEndContract, positionEmployee, salary, benefits) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO ALBERGUE.Employee (idArea, surnamesEmployee, userName, mailContact, cellPhoneNumber, address, dateStartContract, dateEndContract, positionEmployee, salary, benefits) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             pst = con.prepareStatement(sql);
             pst.setInt(1, employee.getIdArea());
             pst.setString(2, employee.getSurnamesEmployee());
-            pst.setString(3, employee.getMailContact());
-            pst.setString(4, employee.getCellPhoneNumber());
-            pst.setString(5, employee.getAddress());
-            pst.setDate(6, (Date) employee.getDateStartContract());
-            pst.setDate(7, (Date) employee.getDateEndContract());
-            pst.setString(8, employee.getPositionEmployee());
-            pst.setBigDecimal(9, employee.getSalary());
-            pst.setString(10, employee.getBenefits());
+            pst.setString(3, employee.getUserName());
+            pst.setString(4, employee.getMailContact());
+            pst.setString(5, employee.getCellPhoneNumber());
+            pst.setString(6, employee.getAddress());
+            pst.setDate(7, (Date) employee.getDateStartContract());
+            pst.setDate(8, (Date) employee.getDateEndContract());
+            pst.setString(9, employee.getPositionEmployee());
+            pst.setBigDecimal(10, employee.getSalary());
+            pst.setString(11, employee.getBenefits());
             pst.executeUpdate();
             pst.close();
             mensaje = "Guardado correctamente";
@@ -45,21 +46,22 @@ public class EmployeeDAO {
 
     public String modificarEmployee(Connection con, Employee employee) {
         PreparedStatement pst = null;
-        String sql = "UPDATE Employee SET idArea = ?, surnamesEmployee = ?, mailContact = ?, cellPhoneNumber = ?, address = ?, dateStartContract = ?, dateEndContract = ?, positionEmployee = ?, salary = ?, benefits = ? WHERE idEmployee = ?";
+        String sql = "UPDATE ALBERGUE.Employee SET idArea = ?, surnamesEmployee = ?, userName = ?, mailContact = ?, cellPhoneNumber = ?, address = ?, dateStartContract = ?, dateEndContract = ?, positionEmployee = ?, salary = ?, benefits = ? WHERE idEmployee = ?";
 
         try {
             pst = con.prepareStatement(sql);
             pst.setInt(1, employee.getIdArea());
             pst.setString(2, employee.getSurnamesEmployee());
-            pst.setString(3, employee.getMailContact());
-            pst.setString(4, employee.getCellPhoneNumber());
-            pst.setString(5, employee.getAddress());
-            pst.setDate(6, (Date) employee.getDateStartContract());
-            pst.setDate(7, (Date) employee.getDateEndContract());
-            pst.setString(8, employee.getPositionEmployee());
-            pst.setBigDecimal(9, employee.getSalary());
-            pst.setString(10, employee.getBenefits());
-            pst.setInt(11, employee.getIdEmployee());
+            pst.setString(3, employee.getUserName());
+            pst.setString(4, employee.getMailContact());
+            pst.setString(5, employee.getCellPhoneNumber());
+            pst.setString(6, employee.getAddress());
+            pst.setDate(7, (Date) employee.getDateStartContract());
+            pst.setDate(8, (Date) employee.getDateEndContract());
+            pst.setString(9, employee.getPositionEmployee());
+            pst.setBigDecimal(10, employee.getSalary());
+            pst.setString(11, employee.getBenefits());
+            pst.setInt(12, employee.getIdEmployee());
 
             int rowsAffected = pst.executeUpdate();
             pst.close();
@@ -77,7 +79,7 @@ public class EmployeeDAO {
 
     public String eliminarEmployee(Connection con, int id) {
         PreparedStatement pst = null;
-        String sql = "DELETE FROM Employee WHERE idEmployee = ?";
+        String sql = "DELETE FROM ALBERGUE.Employee WHERE idEmployee = ?";
 
         try {
             pst = con.prepareStatement(sql);
@@ -101,7 +103,7 @@ public class EmployeeDAO {
         DefaultTableModel model;
         String[] columnas = {"idEmployee", "idArea", "surnamesEmployee", "mailContact", "cellPhoneNumber", "address", "dateStartContract", "dateEndContract", "positionEmployee", "salary", "benefits"};
         model = new DefaultTableModel(null, columnas);
-        String sql = "SELECT idEmployee, idArea, surnamesEmployee, mailContact, cellPhoneNumber, address, dateStartContract, dateEndContract, positionEmployee, salary, benefits FROM Employee ORDER BY idEmployee";
+        String sql = "SELECT idEmployee, idArea, surnamesEmployee, userName, mailContact, cellPhoneNumber, address, dateStartContract, dateEndContract, positionEmployee, salary, benefits FROM ALBERGUE.Employee ORDER BY idEmployee";
         String[] filas = new String[11];
         Statement st = null;
         ResultSet rs = null;

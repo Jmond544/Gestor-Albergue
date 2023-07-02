@@ -27,11 +27,11 @@ public class Frm_Employee extends javax.swing.JPanel {
     }
     
     private void limpiar(){
-        textFieldIdPatient.setValue(0);
+        textFieldIdArea.setValue(0);
         textFieldConsultado.setText("Paciente");
-        textFieldTipoExamen.setText("");
-        textFieldFechaExamen.setText("");
-        textFieldFechaResultado.setText("");
+        textFieldApellido.setText("");
+        textFieldMail.setText("");
+        textFieldPhone.setText("");
         textAreaResultado.setText("");
     }
     
@@ -44,11 +44,11 @@ public class Frm_Employee extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        textFieldTipoExamen = new javax.swing.JTextField();
+        textFieldApellido = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        textFieldFechaExamen = new javax.swing.JTextField();
+        textFieldMail = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        textFieldFechaResultado = new javax.swing.JTextField();
+        textFieldPhone = new javax.swing.JTextField();
         textFieldConsultado = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         textAreaResultado = new javax.swing.JTextArea();
@@ -63,8 +63,10 @@ public class Frm_Employee extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         botonLimpiar = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        textFieldIdPatient = new javax.swing.JSpinner();
-        textFieldIdExam = new javax.swing.JSpinner();
+        textFieldIdArea = new javax.swing.JSpinner();
+        textFieldIdEmployee = new javax.swing.JSpinner();
+        textFieldDirección = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(785, 650));
@@ -75,7 +77,7 @@ public class Frm_Employee extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Formulario examen médico");
+        jLabel1.setText("Formulario Empleado");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -96,36 +98,36 @@ public class Frm_Employee extends javax.swing.JPanel {
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel11.setText("ID Examen Médico:");
+        jLabel11.setText("ID Empleado:");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("ID Paciente:");
+        jLabel2.setText("ID Área:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Tipo de examen:");
+        jLabel3.setText("Apellidos empleado:");
 
-        textFieldTipoExamen.setBackground(new java.awt.Color(255, 255, 255));
-        textFieldTipoExamen.setForeground(new java.awt.Color(0, 0, 0));
+        textFieldApellido.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldApellido.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Fecha examen:");
+        jLabel4.setText("Mail:");
 
-        textFieldFechaExamen.setBackground(new java.awt.Color(255, 255, 255));
-        textFieldFechaExamen.setForeground(new java.awt.Color(0, 0, 0));
+        textFieldMail.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldMail.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Fecha resultados:");
+        jLabel5.setText("Teléfono:");
 
-        textFieldFechaResultado.setBackground(new java.awt.Color(255, 255, 255));
-        textFieldFechaResultado.setForeground(new java.awt.Color(0, 0, 0));
+        textFieldPhone.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldPhone.setForeground(new java.awt.Color(0, 0, 0));
 
         textFieldConsultado.setBackground(new java.awt.Color(255, 255, 255));
         textFieldConsultado.setForeground(new java.awt.Color(0, 0, 0));
-        textFieldConsultado.setText("Paciente");
+        textFieldConsultado.setText("Área");
         textFieldConsultado.setEnabled(false);
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
@@ -249,11 +251,18 @@ public class Frm_Employee extends javax.swing.JPanel {
             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        textFieldIdPatient.addChangeListener(new javax.swing.event.ChangeListener() {
+        textFieldIdArea.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                textFieldIdPatientStateChanged(evt);
+                textFieldIdAreaStateChanged(evt);
             }
         });
+
+        textFieldDirección.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldDirección.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("Dirección:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -264,27 +273,32 @@ public class Frm_Employee extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(18, 18, 18)
-                        .addComponent(textFieldIdExam, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textFieldFechaResultado))
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textFieldDirección))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(textFieldFechaExamen, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(textFieldTipoExamen, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textFieldPhone))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(textFieldIdPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(textFieldConsultado))
-                .addGap(18, 18, 18)
+                        .addComponent(textFieldIdArea, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textFieldConsultado))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(18, 18, 18)
+                        .addComponent(textFieldIdEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(textFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 108, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -315,28 +329,30 @@ public class Frm_Employee extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel11)
-                        .addComponent(textFieldIdExam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(textFieldIdEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(textFieldIdPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(textFieldIdArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textFieldConsultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textFieldConsultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(textFieldTipoExamen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(textFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(textFieldFechaExamen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(textFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textFieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(textFieldFechaResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(textFieldDirección, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12))
+                        .addGap(34, 34, 34))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -355,20 +371,20 @@ public class Frm_Employee extends javax.swing.JPanel {
     }//GEN-LAST:event_botonLimpiarMouseClicked
 
     private void botonAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAgregarMouseClicked
-        if(textFieldIdPatient.getValue() == null || 
-                textFieldTipoExamen.getText().isEmpty() ||
-                textFieldFechaExamen.getText().isEmpty() ||
-                textFieldFechaResultado.getText().isEmpty() ||
+        if(textFieldIdArea.getValue() == null || 
+                textFieldApellido.getText().isEmpty() ||
+                textFieldMail.getText().isEmpty() ||
+                textFieldPhone.getText().isEmpty() ||
                 textAreaResultado.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Rellene todos los campos.");
         }else{
             
             MedicalExam medicalExam = new MedicalExam();
             try {
-                medicalExam.setIdPatient((int) textFieldIdPatient.getValue());
-                medicalExam.setTypeExam(textFieldTipoExamen.getText());
-                medicalExam.setDateExam(textFieldFechaExamen.getText());
-                medicalExam.setDateResults(textFieldFechaResultado.getText());
+                medicalExam.setIdPatient((int) textFieldIdArea.getValue());
+                medicalExam.setTypeExam(textFieldApellido.getText());
+                medicalExam.setDateExam(textFieldMail.getText());
+                medicalExam.setDateResults(textFieldPhone.getText());
                 medicalExam.setResults(textAreaResultado.getText());
                 String mensaje = me_BO.agregarMedicalExam(medicalExam);
                 JOptionPane.showMessageDialog(null, mensaje);
@@ -380,21 +396,21 @@ public class Frm_Employee extends javax.swing.JPanel {
     }//GEN-LAST:event_botonAgregarMouseClicked
 
     private void botonModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonModificarMouseClicked
-        if(textFieldIdPatient.getValue() == null || 
-                textFieldTipoExamen.getText().isEmpty() ||
-                textFieldFechaExamen.getText().isEmpty() ||
-                textFieldFechaResultado.getText().isEmpty() ||
+        if(textFieldIdArea.getValue() == null || 
+                textFieldApellido.getText().isEmpty() ||
+                textFieldMail.getText().isEmpty() ||
+                textFieldPhone.getText().isEmpty() ||
                 textAreaResultado.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Rellene todos los campos.");
         }else{
             
             MedicalExam medicalExam = new MedicalExam();
             try {
-                medicalExam.setIdMedical_Exam((int) textFieldIdExam.getValue());
-                medicalExam.setIdPatient((int)textFieldIdPatient.getValue());
-                medicalExam.setTypeExam(textFieldTipoExamen.getText());
-                medicalExam.setDateExam(textFieldFechaExamen.getText());
-                medicalExam.setDateResults(textFieldFechaResultado.getText());
+                medicalExam.setIdMedical_Exam((int) textFieldIdEmployee.getValue());
+                medicalExam.setIdPatient((int)textFieldIdArea.getValue());
+                medicalExam.setTypeExam(textFieldApellido.getText());
+                medicalExam.setDateExam(textFieldMail.getText());
+                medicalExam.setDateResults(textFieldPhone.getText());
                 medicalExam.setResults(textAreaResultado.getText());
                 String mensaje = me_BO.modificarMedicalExam(medicalExam);
                 JOptionPane.showMessageDialog(null, mensaje);
@@ -406,12 +422,12 @@ public class Frm_Employee extends javax.swing.JPanel {
     }//GEN-LAST:event_botonModificarMouseClicked
 
     private void botonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarMouseClicked
-        if(textFieldIdExam.getValue() == null){
+        if(textFieldIdEmployee.getValue() == null){
             JOptionPane.showMessageDialog(null, "Rellene todos los campos.");
         }else{
 
             try {
-                int index = (int) textFieldIdExam.getValue();
+                int index = (int) textFieldIdEmployee.getValue();
                 String mensaje = me_BO.eliminarMedicalExam(index);
                 JOptionPane.showMessageDialog(null, mensaje);
                 limpiar();
@@ -421,7 +437,7 @@ public class Frm_Employee extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_botonEliminarMouseClicked
 
-    private void textFieldIdPatientStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_textFieldIdPatientStateChanged
+    private void textFieldIdAreaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_textFieldIdAreaStateChanged
         Connection con = OracleDatabaseConnector.getConnection();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -431,7 +447,7 @@ public class Frm_Employee extends javax.swing.JPanel {
                          "FROM ALBERGUE.PATIENT " +
                          "WHERE IDPATIENT = ?";
             pst = con.prepareStatement(sql);
-            pst.setInt(1, (int) textFieldIdPatient.getValue());
+            pst.setInt(1, (int) textFieldIdArea.getValue());
 
             rs = pst.executeQuery();
 
@@ -447,18 +463,18 @@ public class Frm_Employee extends javax.swing.JPanel {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al ejecutar la consulta:\n" + e.getMessage());
         }
-    }//GEN-LAST:event_textFieldIdPatientStateChanged
+    }//GEN-LAST:event_textFieldIdAreaStateChanged
 
     private void TBFormularioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBFormularioMousePressed
         int rowSelected = TBFormulario.getSelectedRow();
         try {
             int idExam = Integer.parseInt(TBFormulario.getValueAt(rowSelected, 0).toString());
             int idPatient = Integer.parseInt(TBFormulario.getValueAt(rowSelected, 1).toString());
-            textFieldIdExam.setValue(idExam);
-            textFieldIdPatient.setValue(idPatient);
-            textFieldTipoExamen.setText(TBFormulario.getValueAt(rowSelected, 2).toString());
-            textFieldFechaExamen.setText(TBFormulario.getValueAt(rowSelected, 3).toString());
-            textFieldFechaResultado.setText(TBFormulario.getValueAt(rowSelected, 4).toString());
+            textFieldIdEmployee.setValue(idExam);
+            textFieldIdArea.setValue(idPatient);
+            textFieldApellido.setText(TBFormulario.getValueAt(rowSelected, 2).toString());
+            textFieldMail.setText(TBFormulario.getValueAt(rowSelected, 3).toString());
+            textFieldPhone.setText(TBFormulario.getValueAt(rowSelected, 4).toString());
             textAreaResultado.setText(TBFormulario.getValueAt(rowSelected, 5).toString());
         } catch (NumberFormatException e) {
             System.out.println("Error al convertir los valores: " + e.getMessage());
@@ -477,6 +493,7 @@ public class Frm_Employee extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -489,11 +506,12 @@ public class Frm_Employee extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea textAreaResultado;
+    private javax.swing.JTextField textFieldApellido;
     private javax.swing.JTextField textFieldConsultado;
-    private javax.swing.JTextField textFieldFechaExamen;
-    private javax.swing.JTextField textFieldFechaResultado;
-    private javax.swing.JSpinner textFieldIdExam;
-    private javax.swing.JSpinner textFieldIdPatient;
-    private javax.swing.JTextField textFieldTipoExamen;
+    private javax.swing.JTextField textFieldDirección;
+    private javax.swing.JSpinner textFieldIdArea;
+    private javax.swing.JSpinner textFieldIdEmployee;
+    private javax.swing.JTextField textFieldMail;
+    private javax.swing.JTextField textFieldPhone;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,7 @@ public class Employee {
     private int idEmployee;
     private int idArea;
     private String surnamesEmployee;
+    private String userName;
     private String mailContact;
     private String cellPhoneNumber;
     private String address;
@@ -39,6 +40,14 @@ public class Employee {
     
     public void setSurnamesEmployee(String surnamesEmployee) {
         this.surnamesEmployee = surnamesEmployee;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
     
     public String getMailContact() {
