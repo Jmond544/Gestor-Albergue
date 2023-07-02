@@ -82,6 +82,7 @@ CREATE TABLE Employee(
     idArea NUMBER(8) NOT NULL,
     surnamesEmployee VARCHAR2(25) NOT NULL,
     userName VARCHAR2(25) NOT NULL,
+    password VARCHAR2(25) NOT NULL,
     mailContact VARCHAR2(25) NOT NULL,
     cellPhoneNumber VARCHAR2(25) NOT NULL,
     address VARCHAR2(50) NOT NULL,
