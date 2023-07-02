@@ -1,47 +1,50 @@
 
 package BO;
-import DAO.Attorney_DAO;
-import Entity.*;
+
+
+import DAO.AreaDAO;
+import Entity.Area;
 import Database.OracleDatabaseConnector;
 import java.sql.Connection;
 import javax.swing.JTable;
 
-public class Attorney_BO {
+public class AreaBO {
     private String mensaje = "";
-    private Attorney_DAO atDao = new Attorney_DAO();
+    private AreaDAO areaDAO = new AreaDAO();
     
-    public String agregarAttorney(Attorney attorney){
+    public String agregarArea(Area area){
         Connection conn = OracleDatabaseConnector.getConnection();
         try{
-            mensaje = atDao.agregarAttorney(conn, attorney);
+            mensaje = areaDAO.agregarArea(conn, area);
         } catch (Exception ex) {
             mensaje = mensaje + " " + ex.getMessage();
         } 
         return mensaje;
     }
     
-    public String modificarAttorney(Attorney attorney){
+    public String modificarArea(Area area){
         Connection conn = OracleDatabaseConnector.getConnection();
         try{
-            mensaje = atDao.modificarAttorney(conn, attorney);
+            mensaje = areaDAO.modificarArea(conn, area);
         } catch (Exception ex) {
             mensaje = mensaje + " " + ex.getMessage();
         }
         return mensaje;
     }
     
-    public String eliminarAttorney(int id){
+    public String eliminarArea(int id){
         Connection conn = OracleDatabaseConnector.getConnection();
         try{
-            mensaje = atDao.eliminarAttorney(conn, id);
+            mensaje = areaDAO.eliminarArea(conn, id);
         } catch (Exception ex) {
             mensaje = mensaje + " " + ex.getMessage();
         }
         return mensaje;
     }
     
-    public void listarAttorney(JTable tabla){
+    public void listarArea(JTable tabla){
         Connection conn = OracleDatabaseConnector.getConnection();
-        atDao.listarAttorney(conn, tabla);
+        areaDAO.listarArea(conn, tabla);
     }
 }
+
