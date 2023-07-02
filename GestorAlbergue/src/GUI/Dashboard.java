@@ -5,9 +5,12 @@ import java.sql.Connection;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
+import Entity.User;
 
 public class Dashboard extends javax.swing.JFrame {
 
@@ -29,12 +32,28 @@ public class Dashboard extends javax.swing.JFrame {
             new ScreenCreateUser(conexion), new ScreenAcercaDe(conexion),
             new ScreenSalir(conexion)};
         pulsacionBoton(6);
+        inicializarLabelPresentation();
+
+    }
+    
+    private void inicializarLabelPresentation(){
         try {
+            String sql = "SELECT granted_role FROM user_role_privs";
+            
+            Statement statement = conexion.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            resultSet.next();
+            String role = resultSet.getString("granted_role");
+            
             labelUserName.setText("Usuario: "+conexion.getMetaData().getUserName());
+            labelRolName.setText("Rol: "+role);
+            
+            User.setUserName(conexion.getMetaData().getUserName());
+            User.setRolName(role);
+            
         } catch (SQLException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
     
     private void pulsacionBoton(int n){
@@ -92,6 +111,7 @@ public class Dashboard extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         labelUserName = new javax.swing.JLabel();
+        labelRolName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFocusable(false);
@@ -346,6 +366,11 @@ public class Dashboard extends javax.swing.JFrame {
         labelUserName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelUserName.setText("Usuario: Default");
 
+        labelRolName.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        labelRolName.setForeground(new java.awt.Color(204, 204, 204));
+        labelRolName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelRolName.setText("Rol: Default");
+
         javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
         panelMenu.setLayout(panelMenuLayout);
         panelMenuLayout.setHorizontalGroup(
@@ -362,7 +387,8 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jSeparator1)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                    .addComponent(labelUserName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(labelUserName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelRolName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelMenuLayout.setVerticalGroup(
@@ -374,9 +400,11 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(labelUserName)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelRolName)
+                .addGap(31, 31, 31)
                 .addComponent(botonGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonCrud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -532,6 +560,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel labelDashboard;
     private javax.swing.JLabel labelEstadisticas;
     private javax.swing.JLabel labelRegistrar;
+    private javax.swing.JLabel labelRolName;
     private javax.swing.JLabel labelSalir;
     private javax.swing.JLabel labelUserName;
     private javax.swing.JLabel logo;
