@@ -72,6 +72,13 @@ BEGIN
 END;
 /
 
+SELECT obtener_cantidad_pacientes() AS cantidad_pacientes FROM DUAL;
+SELECT obtener_cantidad_examenes() AS cantidad_examenes FROM DUAL;
+SELECT obtener_cantidad_voluntarios() AS cantidad_voluntarios FROM DUAL;
+SELECT obtener_cantidad_proveedores() AS cantidad_proveedores FROM DUAL;
+SELECT obtener_cantidad_donaciones_monetarias() AS cantidad_donaciones_monetarias FROM DUAL;
+SELECT obtener_monto_donaciones_monetarias() AS monto_donaciones_monetarias FROM DUAL;
+SELECT obtener_cantidad_donaciones_materiales() AS cantidad_donaciones_materiales FROM DUAL;
 
 /*
 PROCEDIMIENTOS
@@ -86,5 +93,88 @@ BEGIN
   LOOP
     DBMS_OUTPUT.PUT_LINE('Área: ' || rec.nameArea || ', Cantidad de empleados: ' || rec.total_empleados);
   END LOOP;
+END;
+/
+
+
+CREATE OR REPLACE PROCEDURE display_attorneys
+IS
+BEGIN
+   FOR attorney IN (SELECT * FROM Attorney)
+   LOOP
+      DBMS_OUTPUT.PUT_LINE('ID: ' || attorney.idAttorney || ', DNI: ' || attorney.dniAttorney || ', Names: ' || attorney.namesAttorney || ', Surnames: ' || attorney.surnamesAttorney);
+   END LOOP;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE display_patient_history(p_idPatient IN NUMBER)
+IS
+   v_patient Patient%ROWTYPE;
+   v_attorney Attorney%ROWTYPE;
+   v_clinic_history Clinic_History%ROWTYPE;
+BEGIN
+   SELECT *
+   INTO v_patient
+   FROM Patient
+   WHERE idPatient = p_idPatient;
+   
+   SELECT *
+   INTO v_attorney
+   FROM Attorney
+   WHERE idAttorney = v_patient.idAttorney;
+   
+   SELECT *
+   INTO v_clinic_history
+   FROM Clinic_History
+   WHERE idClinic_History = v_patient.idClinic_History;
+   
+   DBMS_OUTPUT.PUT_LINE('Patient ID: ' || v_patient.idPatient);
+   DBMS_OUTPUT.PUT_LINE('Attorney: ' || v_attorney.namesAttorney || ' ' || v_attorney.surnamesAttorney);
+   DBMS_OUTPUT.PUT_LINE('Clinic History Updated: ' || v_clinic_history.updatedClinic_History);
+   -- Otros campos relevantes de la historia clínica del paciente
+   
+EXCEPTION
+   WHEN NO_DATA_FOUND THEN
+      DBMS_OUTPUT.PUT_LINE('Patient not found.');
+END;
+/
+
+CREATE OR REPLACE PROCEDURE display_medical_exams(p_idPatient IN NUMBER)
+IS
+BEGIN
+   FOR exam IN (SELECT * FROM Medical_Exam WHERE idPatient = p_idPatient)
+   LOOP
+      DBMS_OUTPUT.PUT_LINE('Exam ID: ' || exam.idMedical_Exam || ', Type: ' || exam.typeExam || ', Date: ' || exam.dateExam);
+   END LOOP;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE display_employees_in_area(p_idArea IN NUMBER)
+IS
+BEGIN
+   FOR employee IN (SELECT * FROM Employee WHERE idArea = p_idArea)
+   LOOP
+      DBMS_OUTPUT.PUT_LINE('Employee ID: ' || employee.idEmployee || ', Surnames: ' || employee.surnamesEmployee || ', Position: ' || employee.positionEmployee);
+   END LOOP;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE display_monetary_donations(p_idDonor IN NUMBER)
+IS
+BEGIN
+   FOR donation IN (SELECT * FROM MonetaryDonation WHERE idDonor = p_idDonor)
+   LOOP
+      DBMS_OUTPUT.PUT_LINE('Donation ID: ' || donation.idMonetaryDonation || ', Amount: ' || donation.amount || ', Method: ' || donation.methodDonation);
+   END LOOP;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE display_area_budgets
+IS
+BEGIN
+   FOR area IN (SELECT * FROM Area)
+   LOOP
+      DBMS_OUTPUT.PUT_LINE('Area: ' || area.nameArea || ', Budget: ' || area.budgetArea);
+   END LOOP;
 END;
 /
