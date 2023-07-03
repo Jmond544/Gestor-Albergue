@@ -1,7 +1,7 @@
 
 package CRUD;
 
-import BO.MedicalExam_BO;
+import BO.EmployeeBO;
 import Database.OracleDatabaseConnector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,30 +9,42 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import Entity.*;
+import java.sql.Statement;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 public class Frm_Employee extends javax.swing.JPanel {
 
     private Connection conexion;
-    private MedicalExam_BO me_BO;
+    private EmployeeBO em_BO;
+    private String role;
     
     public Frm_Employee(Connection conexion) {
         initComponents();
         this.conexion = conexion;
-        this.me_BO = new MedicalExam_BO();
+        this.em_BO = new EmployeeBO();
         listarMedical_Exam();
     }
 
     private void listarMedical_Exam(){
-        me_BO.listarMedicalExam(TBFormulario);
+        em_BO.listarEmployee(TBFormulario);
     }
     
     private void limpiar(){
+        textFieldIdEmployee.setValue(0);
         textFieldIdArea.setValue(0);
-        textFieldConsultado.setText("Paciente");
         textFieldApellido.setText("");
+        textFieldUserName.setText("");
+        jPassword.setText("");
         textFieldMail.setText("");
         textFieldPhone.setText("");
-        textAreaResultado.setText("");
+        textFieldDirección.setText("");
+        textFieldStartDate.setText("");
+        textFieldEndDate.setText("");
+        textFieldPositionEmployee.setText("");
+        textAreaBenefits.setText("");
+        textFieldSalary.setText("");
+        textFieldConsultado.setText("Area");
     }
     
     @SuppressWarnings("unchecked")
@@ -51,7 +63,7 @@ public class Frm_Employee extends javax.swing.JPanel {
         textFieldPhone = new javax.swing.JTextField();
         textFieldConsultado = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        textAreaResultado = new javax.swing.JTextArea();
+        textAreaBenefits = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TBFormulario = new javax.swing.JTable();
@@ -67,6 +79,18 @@ public class Frm_Employee extends javax.swing.JPanel {
         textFieldIdEmployee = new javax.swing.JSpinner();
         textFieldDirección = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        textFieldStartDate = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        textFieldEndDate = new javax.swing.JTextField();
+        textFieldPositionEmployee = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        textFieldUserName = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jPassword = new javax.swing.JPasswordField();
+        jLabel18 = new javax.swing.JLabel();
+        textFieldSalary = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(785, 650));
@@ -77,7 +101,7 @@ public class Frm_Employee extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Formulario Empleado");
+        jLabel1.setText("Formulario Empleado - Nuevo usuario");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -113,7 +137,7 @@ public class Frm_Employee extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Mail:");
+        jLabel4.setText("UserName:");
 
         textFieldMail.setBackground(new java.awt.Color(255, 255, 255));
         textFieldMail.setForeground(new java.awt.Color(0, 0, 0));
@@ -132,14 +156,14 @@ public class Frm_Employee extends javax.swing.JPanel {
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
-        textAreaResultado.setBackground(new java.awt.Color(255, 255, 255));
-        textAreaResultado.setColumns(20);
-        textAreaResultado.setRows(5);
-        jScrollPane1.setViewportView(textAreaResultado);
+        textAreaBenefits.setBackground(new java.awt.Color(255, 255, 255));
+        textAreaBenefits.setColumns(20);
+        textAreaBenefits.setRows(5);
+        jScrollPane1.setViewportView(textAreaBenefits);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Resultados del examen:");
+        jLabel6.setText("Beneficios");
 
         TBFormulario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -264,48 +288,115 @@ public class Frm_Employee extends javax.swing.JPanel {
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Dirección:");
 
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel13.setText("Fecha inicio contrato:");
+
+        textFieldStartDate.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldStartDate.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel14.setText("Fecha fin contrato:");
+
+        textFieldEndDate.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldEndDate.setForeground(new java.awt.Color(0, 0, 0));
+
+        textFieldPositionEmployee.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldPositionEmployee.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel15.setText("Posición empleado:");
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel16.setText("Mail:");
+
+        textFieldUserName.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldUserName.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel17.setText("Password:");
+
+        jPassword.setBackground(new java.awt.Color(255, 255, 255));
+        jPassword.setText("jPasswordField1");
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel18.setText("Salario:");
+
+        textFieldSalary.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldSalary.setForeground(new java.awt.Color(0, 0, 0));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(textFieldIdArea, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textFieldConsultado, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(18, 18, 18)
+                                .addComponent(textFieldIdEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(7, 7, 7)
+                                .addComponent(textFieldUserName))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textFieldPhone))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPassword))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textFieldDirección))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textFieldPhone))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(textFieldIdArea, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textFieldConsultado))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(18, 18, 18)
-                        .addComponent(textFieldIdEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(textFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 108, Short.MAX_VALUE)
+                        .addComponent(textFieldDirección, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textFieldStartDate)
+                                .addGap(2, 2, 2))
+                            .addComponent(jScrollPane1))
+                        .addGap(15, 15, 15))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addGap(15, 15, 15))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textFieldEndDate))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(17, 17, 17))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(botonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -320,41 +411,76 @@ public class Frm_Employee extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane2)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(textFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textFieldPositionEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textFieldSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(textFieldIdEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13)
+                    .addComponent(textFieldStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(textFieldIdArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textFieldConsultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(textFieldEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel11)
-                        .addComponent(textFieldIdEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(textFieldPositionEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel15)
+                        .addComponent(jLabel18)
+                        .addComponent(textFieldSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(textFieldIdArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textFieldConsultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(textFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(textFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(1, 1, 1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4)
+                                .addComponent(textFieldUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel17))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
                             .addComponent(textFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textFieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel16))
+                        .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textFieldDirección, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
-                        .addGap(34, 34, 34))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel12))))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(botonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -362,7 +488,7 @@ public class Frm_Employee extends javax.swing.JPanel {
                     .addComponent(botonLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -371,48 +497,93 @@ public class Frm_Employee extends javax.swing.JPanel {
     }//GEN-LAST:event_botonLimpiarMouseClicked
 
     private void botonAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAgregarMouseClicked
+        String password = new String( jPassword.getPassword() );
         if(textFieldIdArea.getValue() == null || 
                 textFieldApellido.getText().isEmpty() ||
+                textFieldUserName.getText().isEmpty() ||
+                password.isEmpty() ||
                 textFieldMail.getText().isEmpty() ||
                 textFieldPhone.getText().isEmpty() ||
-                textAreaResultado.getText().isEmpty()){
+                textFieldDirección.getText().isEmpty() ||
+                textFieldStartDate.getText().isEmpty() ||
+                textFieldEndDate.getText().isEmpty() ||
+                textFieldPositionEmployee.getText().isEmpty() ||
+                textFieldSalary.getText().isEmpty() ||
+                textAreaBenefits.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Rellene todos los campos.");
         }else{
-            
-            MedicalExam medicalExam = new MedicalExam();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Employee employee = new Employee();
             try {
-                medicalExam.setIdPatient((int) textFieldIdArea.getValue());
-                medicalExam.setTypeExam(textFieldApellido.getText());
-                medicalExam.setDateExam(textFieldMail.getText());
-                medicalExam.setDateResults(textFieldPhone.getText());
-                medicalExam.setResults(textAreaResultado.getText());
-                String mensaje = me_BO.agregarMedicalExam(medicalExam);
+                employee.setIdArea((int) textFieldIdArea.getValue());
+                employee.setSurnamesEmployee(textFieldApellido.getText());
+                employee.setUserName(textFieldUserName.getText());
+                employee.setPassword(password);
+                employee.setMailContact(textFieldMail.getText());
+                employee.setCellPhoneNumber(textFieldPhone.getText());
+                employee.setAddress(textFieldDirección.getText());
+                employee.setDateStartContract(dateFormat.parse(textFieldStartDate.getText()));
+                employee.setDateEndContract(dateFormat.parse(textFieldEndDate.getText()));
+                employee.setPositionEmployee(textFieldPositionEmployee.getText());
+                employee.setSalary(new BigDecimal(textFieldSalary.getText()));
+                employee.setBenefits(textAreaBenefits.getText());
+                String mensaje = em_BO.agregarEmployee(employee);
                 JOptionPane.showMessageDialog(null, mensaje);
-                limpiar();
                 listarMedical_Exam();
+                
+                // Creacion de usuario
+                Statement statement = conexion.createStatement();
+
+                // Ejecutar el script
+                statement.executeUpdate("ALTER SESSION SET \"_ORACLE_SCRIPT\" = true");
+                statement.executeUpdate("CREATE USER " + employee.getUserName() + " IDENTIFIED BY " + password);
+                statement.executeUpdate("GRANT "+ this.role +" TO " + employee.getUserName());
+
+                
+                JOptionPane.showMessageDialog(null, "Se creó al usuario: "+employee.getUserName());
+                
+                limpiar();
+            }catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error al ejecutar el script: \n" + e.getMessage());
             } catch (Exception e) {
             }
         }
     }//GEN-LAST:event_botonAgregarMouseClicked
 
     private void botonModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonModificarMouseClicked
+        String password = new String( jPassword.getPassword() );
         if(textFieldIdArea.getValue() == null || 
                 textFieldApellido.getText().isEmpty() ||
+                textFieldUserName.getText().isEmpty() ||
+                password.isEmpty() ||
                 textFieldMail.getText().isEmpty() ||
                 textFieldPhone.getText().isEmpty() ||
-                textAreaResultado.getText().isEmpty()){
+                textFieldDirección.getText().isEmpty() ||
+                textFieldStartDate.getText().isEmpty() ||
+                textFieldEndDate.getText().isEmpty() ||
+                textFieldPositionEmployee.getText().isEmpty() ||
+                textFieldSalary.getText().isEmpty() ||
+                textAreaBenefits.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Rellene todos los campos.");
         }else{
             
-            MedicalExam medicalExam = new MedicalExam();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Employee employee = new Employee();
             try {
-                medicalExam.setIdMedical_Exam((int) textFieldIdEmployee.getValue());
-                medicalExam.setIdPatient((int)textFieldIdArea.getValue());
-                medicalExam.setTypeExam(textFieldApellido.getText());
-                medicalExam.setDateExam(textFieldMail.getText());
-                medicalExam.setDateResults(textFieldPhone.getText());
-                medicalExam.setResults(textAreaResultado.getText());
-                String mensaje = me_BO.modificarMedicalExam(medicalExam);
+                employee.setIdEmployee((int) textFieldIdEmployee.getValue());
+                employee.setIdArea((int) textFieldIdArea.getValue());
+                employee.setSurnamesEmployee(textFieldApellido.getText());
+                employee.setUserName(textFieldUserName.getText());
+                employee.setPassword(password);
+                employee.setMailContact(textFieldMail.getText());
+                employee.setCellPhoneNumber(textFieldPhone.getText());
+                employee.setAddress(textFieldDirección.getText());
+                employee.setDateStartContract(dateFormat.parse(textFieldStartDate.getText()));
+                employee.setDateEndContract(dateFormat.parse(textFieldEndDate.getText()));
+                employee.setPositionEmployee(textFieldPositionEmployee.getText());
+                employee.setSalary(new BigDecimal(textFieldSalary.getText()));
+                employee.setBenefits(textAreaBenefits.getText());
+                String mensaje = em_BO.modificarEmployee(employee);
                 JOptionPane.showMessageDialog(null, mensaje);
                 limpiar();
                 listarMedical_Exam();
@@ -423,12 +594,12 @@ public class Frm_Employee extends javax.swing.JPanel {
 
     private void botonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarMouseClicked
         if(textFieldIdEmployee.getValue() == null){
-            JOptionPane.showMessageDialog(null, "Rellene todos los campos.");
+            JOptionPane.showMessageDialog(null, "Rellene el ID del empleado.");
         }else{
 
             try {
                 int index = (int) textFieldIdEmployee.getValue();
-                String mensaje = me_BO.eliminarMedicalExam(index);
+                String mensaje = em_BO.eliminarEmployee(index);
                 JOptionPane.showMessageDialog(null, mensaje);
                 limpiar();
                 listarMedical_Exam();
@@ -443,22 +614,20 @@ public class Frm_Employee extends javax.swing.JPanel {
         ResultSet rs = null;
 
         try {
-            String sql = "SELECT DNIPATIENT, NAMESPATIENT || ', ' || SURNAMESPATIENT AS ALL_NAME, DIAGNOSIS " +
-                         "FROM ALBERGUE.PATIENT " +
-                         "WHERE IDPATIENT = ?";
+            String sql = "SELECT NAMEAREA " +
+                         "FROM ALBERGUE.AREA " +
+                         "WHERE IDAREA = ?";
             pst = con.prepareStatement(sql);
             pst.setInt(1, (int) textFieldIdArea.getValue());
 
             rs = pst.executeQuery();
 
             if (rs.next()) {
-                String dni = rs.getString("DNIPATIENT");
-                String nombreCompleto = rs.getString("ALL_NAME");
-                String diagnostico = rs.getString("DIAGNOSIS");
-                
-                textFieldConsultado.setText(dni + "; " + nombreCompleto + "; " + diagnostico);
+                String nameArea = rs.getString("NAMEAREA");
+                this.role = nameArea;
+                textFieldConsultado.setText(nameArea);
             } else {
-                textFieldConsultado.setText("Paciente no existe.");
+                textFieldConsultado.setText("Área no válida.");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al ejecutar la consulta:\n" + e.getMessage());
@@ -468,14 +637,22 @@ public class Frm_Employee extends javax.swing.JPanel {
     private void TBFormularioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBFormularioMousePressed
         int rowSelected = TBFormulario.getSelectedRow();
         try {
-            int idExam = Integer.parseInt(TBFormulario.getValueAt(rowSelected, 0).toString());
-            int idPatient = Integer.parseInt(TBFormulario.getValueAt(rowSelected, 1).toString());
-            textFieldIdEmployee.setValue(idExam);
-            textFieldIdArea.setValue(idPatient);
+            int idEmpl = Integer.parseInt(TBFormulario.getValueAt(rowSelected, 0).toString());
+            int idArea = Integer.parseInt(TBFormulario.getValueAt(rowSelected, 1).toString());
+            
+            textFieldIdEmployee.setValue(idEmpl);
+            textFieldIdArea.setValue(idArea);
             textFieldApellido.setText(TBFormulario.getValueAt(rowSelected, 2).toString());
-            textFieldMail.setText(TBFormulario.getValueAt(rowSelected, 3).toString());
-            textFieldPhone.setText(TBFormulario.getValueAt(rowSelected, 4).toString());
-            textAreaResultado.setText(TBFormulario.getValueAt(rowSelected, 5).toString());
+            textFieldUserName.setText(TBFormulario.getValueAt(rowSelected, 3).toString());
+            jPassword.setText(TBFormulario.getValueAt(rowSelected, 4).toString());
+            textFieldMail.setText(TBFormulario.getValueAt(rowSelected, 5).toString());
+            textFieldPhone.setText(TBFormulario.getValueAt(rowSelected, 6).toString());
+            textFieldDirección.setText(TBFormulario.getValueAt(rowSelected, 7).toString());
+            textFieldStartDate.setText(TBFormulario.getValueAt(rowSelected, 8).toString());
+            textFieldEndDate.setText(TBFormulario.getValueAt(rowSelected, 9).toString());
+            textFieldPositionEmployee.setText(TBFormulario.getValueAt(rowSelected, 10).toString());
+            textFieldSalary.setText(TBFormulario.getValueAt(rowSelected, 11).toString());
+            textAreaBenefits.setText(TBFormulario.getValueAt(rowSelected, 12).toString());
         } catch (NumberFormatException e) {
             System.out.println("Error al convertir los valores: " + e.getMessage());
         } catch (Exception e) {
@@ -494,6 +671,12 @@ public class Frm_Employee extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -503,15 +686,21 @@ public class Frm_Employee extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField jPassword;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea textAreaResultado;
+    private javax.swing.JTextArea textAreaBenefits;
     private javax.swing.JTextField textFieldApellido;
     private javax.swing.JTextField textFieldConsultado;
     private javax.swing.JTextField textFieldDirección;
+    private javax.swing.JTextField textFieldEndDate;
     private javax.swing.JSpinner textFieldIdArea;
     private javax.swing.JSpinner textFieldIdEmployee;
     private javax.swing.JTextField textFieldMail;
     private javax.swing.JTextField textFieldPhone;
+    private javax.swing.JTextField textFieldPositionEmployee;
+    private javax.swing.JTextField textFieldSalary;
+    private javax.swing.JTextField textFieldStartDate;
+    private javax.swing.JTextField textFieldUserName;
     // End of variables declaration//GEN-END:variables
 }

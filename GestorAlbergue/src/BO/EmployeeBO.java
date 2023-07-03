@@ -8,12 +8,12 @@ import javax.swing.JTable;
 
 public class EmployeeBO {
     private String mensaje = "";
-    private EmployeeDAO employeeDAO = new EmployeeDAO();
+    private EmployeeDAO empDao = new EmployeeDAO();
     
     public String agregarEmployee(Employee employee){
         Connection conn = OracleDatabaseConnector.getConnection();
         try{
-            mensaje = employeeDAO.agregarEmployee(conn, employee);
+            mensaje = empDao.agregarEmployee(conn, employee);
         } catch (Exception ex) {
             mensaje = mensaje + " " + ex.getMessage();
         } 
@@ -23,7 +23,7 @@ public class EmployeeBO {
     public String modificarEmployee(Employee employee){
         Connection conn = OracleDatabaseConnector.getConnection();
         try{
-            mensaje = employeeDAO.modificarEmployee(conn, employee);
+            mensaje = empDao.modificarEmployee(conn, employee);
         } catch (Exception ex) {
             mensaje = mensaje + " " + ex.getMessage();
         }
@@ -33,7 +33,7 @@ public class EmployeeBO {
     public String eliminarEmployee(int id){
         Connection conn = OracleDatabaseConnector.getConnection();
         try{
-            mensaje = employeeDAO.eliminarEmployee(conn, id);
+            mensaje = empDao.eliminarEmployee(conn, id);
         } catch (Exception ex) {
             mensaje = mensaje + " " + ex.getMessage();
         }
@@ -42,7 +42,6 @@ public class EmployeeBO {
     
     public void listarEmployee(JTable tabla){
         Connection conn = OracleDatabaseConnector.getConnection();
-        employeeDAO.listarEmployee(conn, tabla);
+        empDao.listarEmployee(conn, tabla);
     }
 }
-
