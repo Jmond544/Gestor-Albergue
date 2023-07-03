@@ -23,10 +23,10 @@ public class ScreenCreateUser extends javax.swing.JPanel {
         initComponents();
         this.conexion = conexion;
         this.em_BO = new EmployeeBO();
-        listarMedical_Exam();
+        listarEmployees();
     }
 
-    private void listarMedical_Exam(){
+    private void listarEmployees(){
         em_BO.listarEmployee(TBFormulario);
     }
     
@@ -529,9 +529,10 @@ public class ScreenCreateUser extends javax.swing.JPanel {
                 employee.setBenefits(textAreaBenefits.getText());
                 String mensaje = em_BO.agregarEmployee(employee);
                 JOptionPane.showMessageDialog(null, mensaje);
-                listarMedical_Exam();
+                listarEmployees();
                 
                 // Creacion de usuario
+                
                 Statement statement = conexion.createStatement();
 
                 // Ejecutar el script
@@ -586,7 +587,7 @@ public class ScreenCreateUser extends javax.swing.JPanel {
                 String mensaje = em_BO.modificarEmployee(employee);
                 JOptionPane.showMessageDialog(null, mensaje);
                 limpiar();
-                listarMedical_Exam();
+                listarEmployees();
             } catch (Exception e) {
             }
         }
@@ -601,8 +602,21 @@ public class ScreenCreateUser extends javax.swing.JPanel {
                 int index = (int) textFieldIdEmployee.getValue();
                 String mensaje = em_BO.eliminarEmployee(index);
                 JOptionPane.showMessageDialog(null, mensaje);
+                listarEmployees();
+                
+                // Creacion de usuario
+                
+                Statement statement = conexion.createStatement();
+
+                // Ejecutar el script
+                statement.executeUpdate("ALTER SESSION SET \"_ORACLE_SCRIPT\" = true");
+                statement.executeUpdate("DROP USER " + textFieldUserName.getText());
+
+                JOptionPane.showMessageDialog(null, "Se eliminó al usuario: "+textFieldUserName.getText());
+                
                 limpiar();
-                listarMedical_Exam();
+            }catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error al ejecutar el script: \n" + e.getMessage());
             } catch (Exception e) {
             }
         }
