@@ -18,7 +18,7 @@ GRANT CREATE SEQUENCE TO Shelter_Manager;
 GRANT CREATE USER TO Shelter_Manager;
 GRANT CREATE ROLE TO Shelter_Manager;
 GRANT DROP USER TO Shelter_Manager;
-
+GRANT GRANT ANY ROLE TO Shelter_Manager;
 
 GRANT DROP ANY TABLE TO Shelter_Manager;
 GRANT DROP ANY ROLE TO Shelter_Manager;
