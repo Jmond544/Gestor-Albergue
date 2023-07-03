@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
 import Entity.User;
+import javax.swing.JOptionPane;
 
 public class Dashboard extends javax.swing.JFrame {
 
@@ -30,7 +31,7 @@ public class Dashboard extends javax.swing.JFrame {
         listaBotones = new JPanel[] {botonGeneral,botonCrud,botonInforme,botonCrearUsuario,botonAcercaDe,botonSalir};
         listaScreen = new JPanel[] {new ScreenGeneral(conexion),
             new ScreenCrudTables(conexion), new ScreenInformes(conexion),
-            new Frm_Employee(conexion), new ScreenAcercaDe(conexion),
+            new Frm_Employee(conexion), new ScreenAcercaDe(),
             new ScreenSalir(conexion)};
         pulsacionBoton(6);
         inicializarLabelPresentation();
@@ -543,7 +544,14 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_botonAcercaDeMouseClicked
 
     private void botonSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalirMouseClicked
-        showPanel(listaScreen[5]);
+        try {
+            conexion.close();
+            JOptionPane.showMessageDialog(null, "Gracias por usar el programa.","Exit",JOptionPane.PLAIN_MESSAGE);
+            System.exit(0);
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_botonSalirMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
