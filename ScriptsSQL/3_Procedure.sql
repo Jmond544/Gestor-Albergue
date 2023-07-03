@@ -11,6 +11,8 @@ BEGIN
   RETURN total_pacientes;
 END;
 /
+SELECT obtener_cantidad_pacientes() AS cantidad_pacientes FROM DUAL;
+/
 
 CREATE OR REPLACE FUNCTION obtener_cantidad_examenes RETURN NUMBER AS
   total_examenes NUMBER;
@@ -20,6 +22,8 @@ BEGIN
   
   RETURN total_examenes;
 END;
+/
+SELECT obtener_cantidad_examenes() AS cantidad_examenes FROM DUAL;
 /
 
 CREATE OR REPLACE FUNCTION obtener_cantidad_voluntarios RETURN NUMBER AS
@@ -31,6 +35,8 @@ BEGIN
   RETURN total_voluntarios;
 END;
 /
+SELECT obtener_cantidad_voluntarios() AS cantidad_voluntarios FROM DUAL;
+/
 
 CREATE OR REPLACE FUNCTION obtener_cantidad_proveedores RETURN NUMBER AS
   total_proveedores NUMBER;
@@ -40,6 +46,8 @@ BEGIN
   
   RETURN total_proveedores;
 END;
+/
+SELECT obtener_cantidad_proveedores() AS cantidad_proveedores FROM DUAL;
 /
 
 CREATE OR REPLACE FUNCTION obtener_cantidad_donaciones_monetarias RETURN NUMBER AS
@@ -51,6 +59,8 @@ BEGIN
   RETURN total_donaciones_monetarias;
 END;
 /
+SELECT obtener_cantidad_donaciones_monetarias() AS cantidad_donaciones_monetarias FROM DUAL;
+/
 
 CREATE OR REPLACE FUNCTION obtener_monto_donaciones_monetarias RETURN DECIMAL AS
   total_donaciones_monetarias DECIMAL(10, 2);
@@ -60,6 +70,8 @@ BEGIN
   
   RETURN total_donaciones_monetarias;
 END;
+/
+SELECT obtener_monto_donaciones_monetarias() AS monto_donaciones_monetarias FROM DUAL;
 /
 
 CREATE OR REPLACE FUNCTION obtener_cantidad_donaciones_materiales RETURN NUMBER AS
@@ -71,14 +83,8 @@ BEGIN
   RETURN total_donaciones_materiales;
 END;
 /
-
-SELECT obtener_cantidad_pacientes() AS cantidad_pacientes FROM DUAL;
-SELECT obtener_cantidad_examenes() AS cantidad_examenes FROM DUAL;
-SELECT obtener_cantidad_voluntarios() AS cantidad_voluntarios FROM DUAL;
-SELECT obtener_cantidad_proveedores() AS cantidad_proveedores FROM DUAL;
-SELECT obtener_cantidad_donaciones_monetarias() AS cantidad_donaciones_monetarias FROM DUAL;
-SELECT obtener_monto_donaciones_monetarias() AS monto_donaciones_monetarias FROM DUAL;
 SELECT obtener_cantidad_donaciones_materiales() AS cantidad_donaciones_materiales FROM DUAL;
+/
 
 /*
 PROCEDIMIENTOS
@@ -88,12 +94,14 @@ CREATE OR REPLACE PROCEDURE obtener_cantidad_empleados_por_area AS
 BEGIN
   FOR rec IN (SELECT a.nameArea, COUNT(e.idEmployee) AS total_empleados
               FROM Area a
-              LEFT JOIN Employee e ON a.idArea = e.idArea
+              INNER JOIN Employee e ON a.idArea = e.idArea
               GROUP BY a.nameArea)
   LOOP
     DBMS_OUTPUT.PUT_LINE('Área: ' || rec.nameArea || ', Cantidad de empleados: ' || rec.total_empleados);
   END LOOP;
 END;
+/
+EXECUTE obtener_cantidad_empleados_por_area;
 /
 
 CREATE OR REPLACE PROCEDURE display_patient_history(p_idPatient IN NUMBER)
@@ -126,6 +134,8 @@ EXCEPTION
       DBMS_OUTPUT.PUT_LINE('Patient not found.');
 END;
 /
+EXECUTE display_patient_history(1);
+/
 
 CREATE OR REPLACE PROCEDURE display_medical_exams(p_idPatient IN NUMBER)
 IS
@@ -135,6 +145,8 @@ BEGIN
       DBMS_OUTPUT.PUT_LINE('Exam ID: ' || exam.idMedical_Exam || ', Type: ' || exam.typeExam || ', Date: ' || exam.dateExam);
    END LOOP;
 END;
+/
+EXECUTE display_medical_exams(1);
 /
 
 CREATE OR REPLACE PROCEDURE display_employees_in_area(p_idArea IN NUMBER)
@@ -146,3 +158,4 @@ BEGIN
    END LOOP;
 END;
 /
+EXECUTE display_employees_in_area(1);
