@@ -96,17 +96,6 @@ BEGIN
 END;
 /
 
-
-CREATE OR REPLACE PROCEDURE display_attorneys
-IS
-BEGIN
-   FOR attorney IN (SELECT * FROM Attorney)
-   LOOP
-      DBMS_OUTPUT.PUT_LINE('ID: ' || attorney.idAttorney || ', DNI: ' || attorney.dniAttorney || ', Names: ' || attorney.namesAttorney || ', Surnames: ' || attorney.surnamesAttorney);
-   END LOOP;
-END;
-/
-
 CREATE OR REPLACE PROCEDURE display_patient_history(p_idPatient IN NUMBER)
 IS
    v_patient Patient%ROWTYPE;
@@ -131,7 +120,6 @@ BEGIN
    DBMS_OUTPUT.PUT_LINE('Patient ID: ' || v_patient.idPatient);
    DBMS_OUTPUT.PUT_LINE('Attorney: ' || v_attorney.namesAttorney || ' ' || v_attorney.surnamesAttorney);
    DBMS_OUTPUT.PUT_LINE('Clinic History Updated: ' || v_clinic_history.updatedClinic_History);
-   -- Otros campos relevantes de la historia clínica del paciente
    
 EXCEPTION
    WHEN NO_DATA_FOUND THEN
@@ -155,26 +143,6 @@ BEGIN
    FOR employee IN (SELECT * FROM Employee WHERE idArea = p_idArea)
    LOOP
       DBMS_OUTPUT.PUT_LINE('Employee ID: ' || employee.idEmployee || ', Surnames: ' || employee.surnamesEmployee || ', Position: ' || employee.positionEmployee);
-   END LOOP;
-END;
-/
-
-CREATE OR REPLACE PROCEDURE display_monetary_donations(p_idDonor IN NUMBER)
-IS
-BEGIN
-   FOR donation IN (SELECT * FROM MonetaryDonation WHERE idDonor = p_idDonor)
-   LOOP
-      DBMS_OUTPUT.PUT_LINE('Donation ID: ' || donation.idMonetaryDonation || ', Amount: ' || donation.amount || ', Method: ' || donation.methodDonation);
-   END LOOP;
-END;
-/
-
-CREATE OR REPLACE PROCEDURE display_area_budgets
-IS
-BEGIN
-   FOR area IN (SELECT * FROM Area)
-   LOOP
-      DBMS_OUTPUT.PUT_LINE('Area: ' || area.nameArea || ', Budget: ' || area.budgetArea);
    END LOOP;
 END;
 /

@@ -83,7 +83,11 @@ GRANT DELETE ON MonetaryDonation TO Shelter_Manager;
 GRANT DELETE ON MaterialDonation TO Shelter_Manager;
 GRANT DELETE ON Necessity TO Shelter_Manager;
 
-GRANT EXECUTE ANY PROCEDURE TO Shelter_Manager;
+GRANT EXECUTE ON obtener_cantidad_empleados_por_area TO Shelter_Manager;
+GRANT EXECUTE ON display_patient_history TO Shelter_Manager;
+GRANT EXECUTE ON display_medical_exams TO Shelter_Manager;
+GRANT EXECUTE ON display_employees_in_area TO Shelter_Manager;
+
 
 /*
 Rol de Recursos Humanos
@@ -128,7 +132,10 @@ GRANT DELETE ON Employee TO Shelter_Human_Resources;
 GRANT DELETE ON Volunteer TO Shelter_Human_Resources;
 GRANT DELETE ON VolunteerPatient TO Shelter_Human_Resources;
 
-GRANT EXECUTE ANY PROCEDURE TO Shelter_Human_Resources;
+GRANT EXECUTE ON obtener_cantidad_empleados_por_area TO Shelter_Human_Resources;
+GRANT EXECUTE ON display_patient_history TO Shelter_Human_Resources;
+GRANT EXECUTE ON display_medical_exams TO Shelter_Human_Resources;
+GRANT EXECUTE ON display_employees_in_area TO Shelter_Human_Resources;
 
 /*
 Rol de Finanzas
@@ -173,7 +180,9 @@ GRANT DELETE ON MonetaryDonation TO Shelter_Finance;
 GRANT DELETE ON MaterialDonation TO Shelter_Finance;
 GRANT DELETE ON Necessity TO Shelter_Finance;
 
-GRANT EXECUTE ANY PROCEDURE TO Shelter_Finance;
+GRANT EXECUTE ON obtener_cantidad_empleados_por_area TO Shelter_Finance;
+GRANT EXECUTE ON display_employees_in_area TO Shelter_Finance;
+
 
 /*
 Rol de Área de Adquisiciones
@@ -218,7 +227,8 @@ GRANT DELETE ON MonetaryDonation TO Shelter_Procurement_Area;
 GRANT DELETE ON MaterialDonation TO Shelter_Procurement_Area;
 GRANT DELETE ON Necessity TO Shelter_Procurement_Area;
 
-GRANT EXECUTE ANY PROCEDURE TO Shelter_Procurement_Area;
+GRANT EXECUTE ON obtener_cantidad_empleados_por_area TO Shelter_Procurement_Area;
+GRANT EXECUTE ON display_employees_in_area TO Shelter_Procurement_Area;
 
 
 /*Observando los roles creados*/
