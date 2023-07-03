@@ -30,9 +30,9 @@ public class Dashboard extends javax.swing.JFrame {
         initComponents();
         this.screenGeneral = new ScreenGeneral(conexion);
         showPanel(screenGeneral);
-        listaBotones = new JPanel[] {botonGeneral,botonCrud,botonInforme,botonCrearUsuario,botonAcercaDe,botonSalir};
+        listaBotones = new JPanel[] {botonGeneral,botonCrud,botonCrearUsuario,botonAcercaDe,botonSalir};
         listaScreen = new JPanel[] {screenGeneral,
-            new ScreenCrudTables(conexion), new ScreenInformes(conexion),
+            new ScreenCrudTables(conexion),
             new ScreenCreateUser(conexion), new ScreenAcercaDe(),
             new ScreenSalir(conexion)};
         pulsacionBoton(6);
@@ -61,7 +61,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
     
     private void pulsacionBoton(int n){
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             if(i==n){
                 estadoBotones[i] = true;
                 listaBotones[i].setBackground(Color.decode("#6D597A"));
@@ -104,8 +104,6 @@ public class Dashboard extends javax.swing.JFrame {
         labelDashboard = new javax.swing.JLabel();
         botonCrud = new javax.swing.JPanel();
         labelRegistrar = new javax.swing.JLabel();
-        botonInforme = new javax.swing.JPanel();
-        labelConsultarCli = new javax.swing.JLabel();
         botonCrearUsuario = new javax.swing.JPanel();
         labelConsultarRut = new javax.swing.JLabel();
         botonAcercaDe = new javax.swing.JPanel();
@@ -215,41 +213,6 @@ public class Dashboard extends javax.swing.JFrame {
         botonCrudLayout.setVerticalGroup(
             botonCrudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(labelRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
-        botonInforme.setBackground(new java.awt.Color(53, 80, 112));
-        botonInforme.setForeground(new java.awt.Color(0, 24, 72));
-        botonInforme.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botonInformeMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                botonInformeMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                botonInformeMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                botonInformeMousePressed(evt);
-            }
-        });
-
-        labelConsultarCli.setBackground(new java.awt.Color(0, 24, 72));
-        labelConsultarCli.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        labelConsultarCli.setForeground(new java.awt.Color(255, 255, 255));
-        labelConsultarCli.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelConsultarCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icon_informe_orange.png"))); // NOI18N
-        labelConsultarCli.setText("    Informe");
-
-        javax.swing.GroupLayout botonInformeLayout = new javax.swing.GroupLayout(botonInforme);
-        botonInforme.setLayout(botonInformeLayout);
-        botonInformeLayout.setHorizontalGroup(
-            botonInformeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(labelConsultarCli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        botonInformeLayout.setVerticalGroup(
-            botonInformeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(labelConsultarCli, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         botonCrearUsuario.setBackground(new java.awt.Color(53, 80, 112));
@@ -382,7 +345,6 @@ public class Dashboard extends javax.swing.JFrame {
             .addComponent(logo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
             .addComponent(botonGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(botonCrud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(botonInforme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(botonCrearUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(botonAcercaDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(botonSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -408,12 +370,10 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(labelUserName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelRolName)
-                .addGap(31, 31, 31)
+                .addGap(51, 51, 51)
                 .addComponent(botonGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonCrud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botonInforme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonCrearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -469,28 +429,20 @@ public class Dashboard extends javax.swing.JFrame {
         botonExited(1);
     }//GEN-LAST:event_botonCrudMouseExited
 
-    private void botonInformeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonInformeMouseEntered
-        botonEntered(2);
-    }//GEN-LAST:event_botonInformeMouseEntered
-
-    private void botonInformeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonInformeMouseExited
-        botonExited(2);
-    }//GEN-LAST:event_botonInformeMouseExited
-
     private void botonAcercaDeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAcercaDeMouseEntered
-        botonEntered(4);
+        botonEntered(3);
     }//GEN-LAST:event_botonAcercaDeMouseEntered
 
     private void botonAcercaDeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAcercaDeMouseExited
-        botonExited(4);
+        botonExited(3);
     }//GEN-LAST:event_botonAcercaDeMouseExited
 
     private void botonSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalirMouseEntered
-        botonEntered(5);
+        botonEntered(4);
     }//GEN-LAST:event_botonSalirMouseEntered
 
     private void botonSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalirMouseExited
-        botonExited(5);
+        botonExited(4);
     }//GEN-LAST:event_botonSalirMouseExited
 
     private void botonGeneralMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGeneralMousePressed
@@ -501,28 +453,24 @@ public class Dashboard extends javax.swing.JFrame {
         pulsacionBoton(1);
     }//GEN-LAST:event_botonCrudMousePressed
 
-    private void botonInformeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonInformeMousePressed
-        pulsacionBoton(2);
-    }//GEN-LAST:event_botonInformeMousePressed
-
     private void botonAcercaDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAcercaDeMousePressed
-        pulsacionBoton(4);
+        pulsacionBoton(3);
     }//GEN-LAST:event_botonAcercaDeMousePressed
 
     private void botonSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalirMousePressed
-        pulsacionBoton(5);
+        pulsacionBoton(4);
     }//GEN-LAST:event_botonSalirMousePressed
 
     private void botonCrearUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCrearUsuarioMousePressed
-        pulsacionBoton(3);
+        pulsacionBoton(2);
     }//GEN-LAST:event_botonCrearUsuarioMousePressed
 
     private void botonCrearUsuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCrearUsuarioMouseExited
-        botonExited(3);
+        botonExited(2);
     }//GEN-LAST:event_botonCrearUsuarioMouseExited
 
     private void botonCrearUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCrearUsuarioMouseEntered
-        botonEntered(3);
+        botonEntered(2);
     }//GEN-LAST:event_botonCrearUsuarioMouseEntered
 
     private void botonGeneralMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGeneralMouseClicked
@@ -534,16 +482,12 @@ public class Dashboard extends javax.swing.JFrame {
         showPanel(listaScreen[1]);
     }//GEN-LAST:event_botonCrudMouseClicked
 
-    private void botonInformeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonInformeMouseClicked
-        showPanel(listaScreen[2]);
-    }//GEN-LAST:event_botonInformeMouseClicked
-
     private void botonCrearUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCrearUsuarioMouseClicked
-        showPanel(listaScreen[3]);
+        showPanel(listaScreen[2]);
     }//GEN-LAST:event_botonCrearUsuarioMouseClicked
 
     private void botonAcercaDeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAcercaDeMouseClicked
-        showPanel(listaScreen[4]);
+        showPanel(listaScreen[3]);
     }//GEN-LAST:event_botonAcercaDeMouseClicked
 
     private void botonSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalirMouseClicked
@@ -563,11 +507,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel botonCrearUsuario;
     private javax.swing.JPanel botonCrud;
     private javax.swing.JPanel botonGeneral;
-    private javax.swing.JPanel botonInforme;
     private javax.swing.JPanel botonSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel labelConsultarCli;
     private javax.swing.JLabel labelConsultarRut;
     private javax.swing.JLabel labelDashboard;
     private javax.swing.JLabel labelEstadisticas;
