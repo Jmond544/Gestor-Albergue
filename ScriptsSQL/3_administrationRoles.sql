@@ -88,6 +88,14 @@ GRANT EXECUTE ON display_patient_history TO Shelter_Manager;
 GRANT EXECUTE ON display_medical_exams TO Shelter_Manager;
 GRANT EXECUTE ON display_employees_in_area TO Shelter_Manager;
 
+GRANT EXECUTE ON obtener_cantidad_pacientes TO Shelter_Manager;
+GRANT EXECUTE ON obtener_cantidad_examenes TO Shelter_Manager;
+GRANT EXECUTE ON obtener_cantidad_voluntarios TO Shelter_Manager;
+GRANT EXECUTE ON obtener_cantidad_proveedores TO Shelter_Manager;
+GRANT EXECUTE ON obtener_cantidad_donaciones_monetarias TO Shelter_Manager;
+GRANT EXECUTE ON obtener_monto_donaciones_monetarias TO Shelter_Manager;
+GRANT EXECUTE ON obtener_cantidad_donaciones_materiales TO Shelter_Manager;
+
 
 /*
 Rol de Recursos Humanos
@@ -137,6 +145,14 @@ GRANT EXECUTE ON display_patient_history TO Shelter_Human_Resources;
 GRANT EXECUTE ON display_medical_exams TO Shelter_Human_Resources;
 GRANT EXECUTE ON display_employees_in_area TO Shelter_Human_Resources;
 
+GRANT EXECUTE ON obtener_cantidad_pacientes TO Shelter_Human_Resources;
+GRANT EXECUTE ON obtener_cantidad_examenes TO Shelter_Human_Resources;
+GRANT EXECUTE ON obtener_cantidad_voluntarios TO Shelter_Human_Resources;
+GRANT EXECUTE ON obtener_cantidad_proveedores TO Shelter_Human_Resources;
+GRANT EXECUTE ON obtener_cantidad_donaciones_monetarias TO Shelter_Human_Resources;
+GRANT EXECUTE ON obtener_monto_donaciones_monetarias TO Shelter_Human_Resources;
+GRANT EXECUTE ON obtener_cantidad_donaciones_materiales TO Shelter_Human_Resources;
+
 /*
 Rol de Finanzas
 */
@@ -183,6 +199,13 @@ GRANT DELETE ON Necessity TO Shelter_Finance;
 GRANT EXECUTE ON obtener_cantidad_empleados_por_area TO Shelter_Finance;
 GRANT EXECUTE ON display_employees_in_area TO Shelter_Finance;
 
+GRANT EXECUTE ON obtener_cantidad_pacientes TO Shelter_Finance;
+GRANT EXECUTE ON obtener_cantidad_examenes TO Shelter_Finance;
+GRANT EXECUTE ON obtener_cantidad_voluntarios TO Shelter_Finance;
+GRANT EXECUTE ON obtener_cantidad_proveedores TO Shelter_Finance;
+GRANT EXECUTE ON obtener_cantidad_donaciones_monetarias TO Shelter_Finance;
+GRANT EXECUTE ON obtener_monto_donaciones_monetarias TO Shelter_Finance;
+GRANT EXECUTE ON obtener_cantidad_donaciones_materiales TO Shelter_Finance;
 
 /*
 Rol de Área de Adquisiciones
@@ -230,6 +253,13 @@ GRANT DELETE ON Necessity TO Shelter_Procurement_Area;
 GRANT EXECUTE ON obtener_cantidad_empleados_por_area TO Shelter_Procurement_Area;
 GRANT EXECUTE ON display_employees_in_area TO Shelter_Procurement_Area;
 
+GRANT EXECUTE ON obtener_cantidad_pacientes TO Shelter_Procurement_Area;
+GRANT EXECUTE ON obtener_cantidad_examenes TO Shelter_Procurement_Area;
+GRANT EXECUTE ON obtener_cantidad_voluntarios TO Shelter_Procurement_Area;
+GRANT EXECUTE ON obtener_cantidad_proveedores TO Shelter_Procurement_Area;
+GRANT EXECUTE ON obtener_cantidad_donaciones_monetarias TO Shelter_Procurement_Area;
+GRANT EXECUTE ON obtener_monto_donaciones_monetarias TO Shelter_Procurement_Area;
+GRANT EXECUTE ON obtener_cantidad_donaciones_materiales TO Shelter_Procurement_Area;
 
 /*Observando los roles creados*/
 
@@ -240,8 +270,10 @@ SELECT USERNAME, GRANTED_ROLE
 FROM USER_ROLE_PRIVS;
 
 /*CREANDO USUARIOS*/
-/*CREATE USER JUAN IDENTIFIED BY 1234;*/
+DROP USER JUAN;
+CREATE USER JUAN IDENTIFIED BY 1234;
 GRANT Shelter_Manager TO JUAN;
 
-/*CREATE USER FRANCISCO IDENTIFIED BY 1234;*/
+DROP USER FRANCISCO;
+CREATE USER FRANCISCO IDENTIFIED BY 1234;
 GRANT Shelter_Procurement_Area TO FRANCISCO;

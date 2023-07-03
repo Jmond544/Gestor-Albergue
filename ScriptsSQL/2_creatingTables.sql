@@ -218,7 +218,7 @@ CREATE TABLE Necessity(
     idMonetaryDonation NUMBER(8) NOT NULL,
     description VARCHAR2(50) NOT NULL,
     dateRequest DATE NOT NULL,
-    estimatedCost DECIMAL(5,2) NOT NULL,
+    estimatedCost DECIMAL(10,2) NOT NULL,
     CONSTRAINT pk_Necessity PRIMARY KEY(idNecessity),
     CONSTRAINT fk_Necessity_Area FOREIGN KEY (idArea) REFERENCES Area(idArea),
     CONSTRAINT fk_Necessity_MonetaryDontion FOREIGN KEY (idMonetaryDonation) REFERENCES MonetaryDonation(idMonetaryDonation),
