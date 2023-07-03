@@ -20,6 +20,7 @@ public class Dashboard extends javax.swing.JFrame {
     private boolean estadoBotones[];
     private javax.swing.JPanel listaBotones[];
     private javax.swing.JPanel listaScreen[];
+    private ScreenGeneral screenGeneral;
     
     // Métodos
     
@@ -27,8 +28,10 @@ public class Dashboard extends javax.swing.JFrame {
         this.conexion = conexion;
         estadoBotones = new boolean[6];
         initComponents();
+        this.screenGeneral = new ScreenGeneral(conexion);
+        showPanel(screenGeneral);
         listaBotones = new JPanel[] {botonGeneral,botonCrud,botonInforme,botonCrearUsuario,botonAcercaDe,botonSalir};
-        listaScreen = new JPanel[] {new ScreenGeneral(conexion),
+        listaScreen = new JPanel[] {screenGeneral,
             new ScreenCrudTables(conexion), new ScreenInformes(conexion),
             new ScreenCreateUser(conexion), new ScreenAcercaDe(),
             new ScreenSalir(conexion)};
@@ -523,6 +526,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_botonCrearUsuarioMouseEntered
 
     private void botonGeneralMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGeneralMouseClicked
+        screenGeneral.actualizarDatos();
         showPanel(listaScreen[0]);
     }//GEN-LAST:event_botonGeneralMouseClicked
 

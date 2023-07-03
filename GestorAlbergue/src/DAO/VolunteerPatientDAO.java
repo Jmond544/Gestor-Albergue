@@ -102,7 +102,7 @@ public class VolunteerPatientDAO {
             }
             tabla.setModel(model);
         } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "No se puede listar la tabla");
+            //JOptionPane.showMessageDialog(null, "No se puede listar la tabla");
         }
     }
 }
