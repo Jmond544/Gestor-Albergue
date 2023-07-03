@@ -1,7 +1,6 @@
 
 package GUI;
 
-import CRUD.Frm_Employee;
 import java.sql.Connection;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -31,7 +30,7 @@ public class Dashboard extends javax.swing.JFrame {
         listaBotones = new JPanel[] {botonGeneral,botonCrud,botonInforme,botonCrearUsuario,botonAcercaDe,botonSalir};
         listaScreen = new JPanel[] {new ScreenGeneral(conexion),
             new ScreenCrudTables(conexion), new ScreenInformes(conexion),
-            new Frm_Employee(conexion), new ScreenAcercaDe(),
+            new ScreenCreateUser(conexion), new ScreenAcercaDe(),
             new ScreenSalir(conexion)};
         pulsacionBoton(6);
         inicializarLabelPresentation();
