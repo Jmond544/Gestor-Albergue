@@ -173,8 +173,3 @@ VALUES (4, 'Apellido4', 'Usuario4', 'Contraseña4', 'correo4@example.com', '4567
 
 ALTER TABLE Area
 ENABLE CONSTRAINT fk_area_supervisor;
-
-SELECT * FROM Area;
-
-DESC AREA;
-DESC EMPLOYEE;
